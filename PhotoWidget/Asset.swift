@@ -3,6 +3,7 @@ import Photos
 import UIKit
 
 final class Asset: ObservableObject {
+    let id: String
     @Published var image: UIImage? = nil
     let asset: PHAsset
     private var manager = PHImageManager.default()
@@ -25,6 +26,7 @@ final class Asset: ObservableObject {
     }
 
     init(asset: PHAsset) {
+        self.id = asset.localIdentifier
         self.asset = asset
     }
 }

@@ -1,11 +1,13 @@
 import ComposableArchitecture
 import SwiftUI
+import UIKit
 
 enum SettingTCA {
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer { _, action, _ in
+        Reducer { state, action, _ in
             switch action {
             case .onAppear:
+                state.savedAsset = SharedDataStoreManager.shared.loadAsset()
                 return .none
             }
         }
@@ -17,7 +19,9 @@ extension SettingTCA {
         case onAppear
     }
 
-    struct State: Equatable {}
+    struct State: Equatable {
+        var savedAsset: [SharedAsset] = []
+    }
 
     struct Environment {
         let mainQueue: AnySchedulerOf<DispatchQueue>
@@ -28,13 +32,47 @@ extension SettingTCA {
 struct SettingView: View {
     let store: Store<SettingTCA.State, SettingTCA.Action>
 
+    private let gridItemLayout = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+    ]
+
+    static let thumbnailSize = UIScreen.main.bounds.size.width / 4
+
     var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView {}
-                .navigationBarTitle("設定", displayMode: .inline)
-                .onAppear {
-                    viewStore.send(.onAppear)
+            ScrollView {
+                LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {
+                    ForEach(viewStore.savedAsset, id: \.self) { asset in
+                        SharedAssetRow(asset: asset)
+                            .frame(maxWidth: SettingView.thumbnailSize)
+                            .frame(height: SettingView.thumbnailSize)
+                    }
                 }
+            }
+            .navigationBarTitle("設定", displayMode: .inline)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
+        }
+    }
+}
+
+struct SharedAssetRow: View {
+    let asset: SharedAsset
+
+    private let thumbnailSize = CGSize(width: SettingView.thumbnailSize, height: SettingView.thumbnailSize)
+
+    var body: some View {
+        HStack {
+            Image(uiImage: UIImage(data: asset.imageData!)!)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: thumbnailSize.width)
+                .frame(height: thumbnailSize.height)
+                .clipped()
         }
     }
 }

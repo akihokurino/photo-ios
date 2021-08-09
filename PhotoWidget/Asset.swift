@@ -9,6 +9,10 @@ final class Asset: ObservableObject {
     private var manager = PHImageManager.default()
 
     func request(with targetSize: CGSize) {
+        guard self.image == nil else {
+            return
+        }
+        
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
         DispatchQueue.global().async {

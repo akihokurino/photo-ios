@@ -1,6 +1,7 @@
 import Combine
 import ComposableArchitecture
 import SwiftUI
+import WidgetKit
 
 enum AssetListTCA {
     static let reducer = Reducer<State, Action, Environment>.combine(
@@ -26,10 +27,10 @@ enum AssetListTCA {
                 state.assets = assets
                 return .none
             case .save(let asset):
-                return PhotosManager.requestFullImage(asset: asset, deliveryMode: .highQualityFormat)
-                    .flatMap { _ in
+                return PhotosManager.requestImage(asset: asset, targetSize: CGSize(width: 1000, height: 1000))
+                    .flatMap { image in
                         Future<Asset, Never> { promise in
-                            let sharedAsset = SharedPhoto(photosId: asset.id, imageData: asset.image?.pngData())
+                            let sharedAsset = SharedPhoto(photosId: asset.id, imageData: image?.pngData())
                             SharedDataStoreManager.shared.saveAsset(asset: sharedAsset)
                             promise(.success(asset))
                         }
@@ -39,6 +40,9 @@ enum AssetListTCA {
             case .saved(let asset):
                 state.isPresentedAlert = true
                 state.alertText = "写真を保存しました"
+                
+                WidgetCenter.shared.reloadAllTimelines()
+                
                 return .none
             case .isPresentedAlert(let val):
                 state.isPresentedAlert = val
@@ -114,7 +118,7 @@ struct AssetListView: View {
             .actionSheet(isPresented: $isShowActionSheet) {
                 ActionSheet(title: Text("選択してください"), buttons:
                     [
-                        .default(Text("保存")) {
+                        .default(Text("Widgetに表示する")) {
                             guard let asset = selectedAsset else {
                                 return
                             }
@@ -159,7 +163,7 @@ struct AssetRow: View {
             }
         }
         .onAppear {
-            asset.request(with: thumbnailSize)
+            asset.request(with: CGSize(width: AssetListView.thumbnailSize * 2, height: AssetListView.thumbnailSize * 2))
         }
     }
 }

@@ -5,7 +5,7 @@ import UIKit
 typealias PhotoAuthorizationStatus = PHAuthorizationStatus
 typealias PhotosImageResponse = UIImage?
 
-struct PhotosManager {
+enum PhotosManager {
     static func requestAuthorization() -> Future<PhotoAuthorizationStatus, Never> {
         return Future<PhotoAuthorizationStatus, Never> { promise in
             PHPhotoLibrary.requestAuthorization { status in
@@ -33,10 +33,26 @@ struct PhotosManager {
         }
     }
 
-    static func requestFullImage(asset: Asset, deliveryMode: PHImageRequestOptionsDeliveryMode) -> Future<PhotosImageResponse, Never> {
+    static func requestImage(asset: Asset, targetSize: CGSize) -> Future<PhotosImageResponse, Never> {
         return Future<UIImage?, Never> { promise in
             let options = PHImageRequestOptions()
-            options.deliveryMode = deliveryMode
+            options.deliveryMode = .highQualityFormat
+            PHImageManager
+                .default().requestImage(
+                    for: asset.asset,
+                    targetSize: targetSize,
+                    contentMode: .aspectFill,
+                    options: options
+                ) { image, _ in
+                    promise(.success(image))
+                }
+        }
+    }
+
+    static func requestFullImage(asset: Asset) -> Future<PhotosImageResponse, Never> {
+        return Future<UIImage?, Never> { promise in
+            let options = PHImageRequestOptions()
+            options.deliveryMode = .highQualityFormat
             PHImageManager
                 .default()
                 .requestImage(

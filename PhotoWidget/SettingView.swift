@@ -1,24 +1,28 @@
 import ComposableArchitecture
 import SwiftUI
 import UIKit
+import WidgetKit
 
 enum SettingTCA {
     static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, _ in
             switch action {
             case .onAppear:
-                state.savedAsset = SharedDataStoreManager.shared.loadAsset()
+                state.selectedPhotos = SharedDataStoreManager.shared.loadAsset()
                 return .none
             case .refresh:
                 state.isRefreshing = true
-                state.savedAsset = SharedDataStoreManager.shared.loadAsset()
+                state.selectedPhotos = SharedDataStoreManager.shared.loadAsset()
                 state.isRefreshing = false
                 return .none
             case .delete(let photo):
                 SharedDataStoreManager.shared.deleteAsset(asset: photo)
                 state.isPresentedAlert = true
                 state.alertText = "削除しました"
-                state.savedAsset = SharedDataStoreManager.shared.loadAsset()
+                state.selectedPhotos = SharedDataStoreManager.shared.loadAsset()
+                
+                WidgetCenter.shared.reloadAllTimelines()
+                
                 return .none
             case .isPresentedAlert(let val):
                 state.isPresentedAlert = val
@@ -37,7 +41,7 @@ extension SettingTCA {
     }
 
     struct State: Equatable {
-        var savedAsset: [SharedPhoto] = []
+        var selectedPhotos: [SharedPhoto] = []
         var isRefreshing = false
         var isPresentedAlert = false
         var alertText = ""
@@ -71,14 +75,14 @@ struct SettingView: View {
                     viewStore.send(.refresh)
                 })
 
-                Text("保存した画像")
-                    .foregroundColor(Color.black)
+                Text("Widgetに表示する画像")
+                    .foregroundColor(Color.white)
                     .font(Font.system(size: 15.0))
                     .fontWeight(.bold)
                     .padding()
 
                 LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {
-                    ForEach(viewStore.savedAsset, id: \.self) { photo in
+                    ForEach(viewStore.selectedPhotos, id: \.self) { photo in
                         Button(action: {
                             selectedPhoto = photo
                             isShowActionSheet = true

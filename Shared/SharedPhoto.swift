@@ -1,5 +1,7 @@
 import Foundation
 
+let MAX_PHOTO_NUM = 60
+
 struct SharedPhoto: Equatable, Codable, Hashable {
     var id: String
     var localId: String

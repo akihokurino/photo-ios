@@ -2,34 +2,40 @@ import Combine
 import ComposableArchitecture
 import SwiftUI
 
-enum PhotoListTCA {
+enum AssetListTCA {
     static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, _ in
             switch action {
             case .onAppear:
                 return PhotosManager.requestAuthorization()
                     .eraseToEffect()
-                    .map(PhotoListTCA.Action.authorized)
+                    .map(AssetListTCA.Action.authorized)
+            case .refresh:
+                state.isRefreshing = true
+                return PhotosManager.fetchAssets()
+                    .eraseToEffect()
+                    .map(AssetListTCA.Action.assets)
             case .authorized(.authorized):
                 return PhotosManager.fetchAssets()
                     .eraseToEffect()
-                    .map(PhotoListTCA.Action.assets)
+                    .map(AssetListTCA.Action.assets)
             case .authorized(let status):
                 return .none
             case .assets(let assets):
+                state.isRefreshing = false
                 state.assets = assets
                 return .none
             case .save(let asset):
                 return PhotosManager.requestFullImage(asset: asset, deliveryMode: .highQualityFormat)
-                    .flatMap { image in
+                    .flatMap { _ in
                         Future<Asset, Never> { promise in
-                            let sharedAsset = SharedAsset(photosId: asset.id, imageData: asset.image?.pngData())
+                            let sharedAsset = SharedPhoto(photosId: asset.id, imageData: asset.image?.pngData())
                             SharedDataStoreManager.shared.saveAsset(asset: sharedAsset)
                             promise(.success(asset))
                         }
                     }
                     .eraseToEffect()
-                    .map(PhotoListTCA.Action.saved)
+                    .map(AssetListTCA.Action.saved)
             case .saved(let asset):
                 state.isPresentedAlert = true
                 state.alertText = "写真を保存しました"
@@ -42,9 +48,10 @@ enum PhotoListTCA {
     )
 }
 
-extension PhotoListTCA {
+extension AssetListTCA {
     enum Action: Equatable {
         case onAppear
+        case refresh
         case authorized(PhotoAuthorizationStatus)
         case assets([Asset])
         case save(Asset)
@@ -56,6 +63,7 @@ extension PhotoListTCA {
         var assets: [Asset] = []
         var isPresentedAlert = false
         var alertText = ""
+        var isRefreshing = false
     }
 
     struct Environment {
@@ -64,8 +72,8 @@ extension PhotoListTCA {
     }
 }
 
-struct PhotoListView: View {
-    let store: Store<PhotoListTCA.State, PhotoListTCA.Action>
+struct AssetListView: View {
+    let store: Store<AssetListTCA.State, AssetListTCA.Action>
 
     private let gridItemLayout = [
         GridItem(.flexible()),
@@ -81,6 +89,13 @@ struct PhotoListView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
+                RefreshControl(isRefreshing: Binding(
+                    get: { viewStore.isRefreshing },
+                    set: { _ in }
+                ), coordinateSpaceName: "RefreshControl", onRefresh: {
+                    viewStore.send(.refresh)
+                })
+
                 LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {
                     ForEach(viewStore.assets, id: \.self) { asset in
                         Button(action: {
@@ -88,12 +103,13 @@ struct PhotoListView: View {
                             isShowActionSheet = true
                         }) {
                             AssetRow(asset: asset)
-                                .frame(maxWidth: PhotoListView.thumbnailSize)
-                                .frame(height: PhotoListView.thumbnailSize)
+                                .frame(maxWidth: AssetListView.thumbnailSize)
+                                .frame(height: AssetListView.thumbnailSize)
                         }
                     }
                 }
             }
+            .coordinateSpace(name: "RefreshControl")
             .navigationBarTitle("写真", displayMode: .inline)
             .actionSheet(isPresented: $isShowActionSheet) {
                 ActionSheet(title: Text("選択してください"), buttons:
@@ -109,7 +125,7 @@ struct PhotoListView: View {
             }
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
-                send: PhotoListTCA.Action.isPresentedAlert
+                send: AssetListTCA.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
@@ -123,7 +139,7 @@ struct PhotoListView: View {
 struct AssetRow: View {
     @ObservedObject var asset: Asset
 
-    private let thumbnailSize = CGSize(width: PhotoListView.thumbnailSize, height: PhotoListView.thumbnailSize)
+    private let thumbnailSize = CGSize(width: AssetListView.thumbnailSize, height: AssetListView.thumbnailSize)
 
     var body: some View {
         HStack {
@@ -137,8 +153,8 @@ struct AssetRow: View {
 
             } else {
                 Color
-                    .white
-                    .frame(maxWidth: thumbnailSize.width)
+                    .gray
+                    .frame(width: thumbnailSize.width)
                     .frame(height: thumbnailSize.height)
             }
         }
@@ -148,12 +164,12 @@ struct AssetRow: View {
     }
 }
 
-struct PhotoListView_Previews: PreviewProvider {
+struct AssetListView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoListView(store: .init(
-            initialState: PhotoListTCA.State(),
+        AssetListView(store: .init(
+            initialState: AssetListTCA.State(),
             reducer: .empty,
-            environment: PhotoListTCA.Environment(
+            environment: AssetListTCA.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

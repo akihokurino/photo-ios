@@ -14,12 +14,14 @@
 		0250E51726C0D6C900F976E9 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51626C0D6C900F976E9 /* PhotosManager.swift */; };
 		0250E51926C0D88100F976E9 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51826C0D88100F976E9 /* Asset.swift */; };
 		0250E51C26C0D92F00F976E9 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E51B26C0D92F00F976E9 /* ComposableArchitecture */; };
-		0250E51E26C0E4D900F976E9 /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51D26C0E4D900F976E9 /* PhotoListView.swift */; };
+		0250E51E26C0E4D900F976E9 /* AssetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51D26C0E4D900F976E9 /* AssetListView.swift */; };
 		0250E52026C0E4ED00F976E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51F26C0E4ED00F976E9 /* SettingView.swift */; };
 		0250E52326C0F7E500F976E9 /* SharedDataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */; };
-		0250E52626C0F99B00F976E9 /* SharedAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52526C0F99B00F976E9 /* SharedAsset.swift */; };
+		0250E52626C0F99B00F976E9 /* SharedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52526C0F99B00F976E9 /* SharedPhoto.swift */; };
 		0250E52A26C1050C00F976E9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E52926C1050C00F976E9 /* Realm */; };
 		0250E52C26C1050C00F976E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E52B26C1050C00F976E9 /* RealmSwift */; };
+		0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */; };
+		0250E53026C11DD400F976E9 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52F26C11DD400F976E9 /* RefreshControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,10 +33,12 @@
 		0250E51026C0D63200F976E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0250E51626C0D6C900F976E9 /* PhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
 		0250E51826C0D88100F976E9 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
-		0250E51D26C0E4D900F976E9 /* PhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
+		0250E51D26C0E4D900F976E9 /* AssetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListView.swift; sourceTree = "<group>"; };
 		0250E51F26C0E4ED00F976E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataStoreManager.swift; sourceTree = "<group>"; };
-		0250E52526C0F99B00F976E9 /* SharedAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAsset.swift; sourceTree = "<group>"; };
+		0250E52526C0F99B00F976E9 /* SharedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPhoto.swift; sourceTree = "<group>"; };
+		0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntent.swift; sourceTree = "<group>"; };
+		0250E52F26C11DD400F976E9 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +78,11 @@
 			children = (
 				0250E50726C0D63000F976E9 /* PhotoWidgetApp.swift */,
 				0250E50926C0D63000F976E9 /* RootView.swift */,
-				0250E51D26C0E4D900F976E9 /* PhotoListView.swift */,
+				0250E51D26C0E4D900F976E9 /* AssetListView.swift */,
 				0250E51F26C0E4ED00F976E9 /* SettingView.swift */,
 				0250E51626C0D6C900F976E9 /* PhotosManager.swift */,
 				0250E51826C0D88100F976E9 /* Asset.swift */,
+				0250E52F26C11DD400F976E9 /* RefreshControl.swift */,
 				0250E50B26C0D63200F976E9 /* Assets.xcassets */,
 				0250E51026C0D63200F976E9 /* Info.plist */,
 				0250E50D26C0D63200F976E9 /* Preview Content */,
@@ -97,7 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */,
-				0250E52526C0F99B00F976E9 /* SharedAsset.swift */,
+				0250E52526C0F99B00F976E9 /* SharedPhoto.swift */,
+				0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -191,10 +197,12 @@
 				0250E51726C0D6C900F976E9 /* PhotosManager.swift in Sources */,
 				0250E50A26C0D63000F976E9 /* RootView.swift in Sources */,
 				0250E52026C0E4ED00F976E9 /* SettingView.swift in Sources */,
-				0250E51E26C0E4D900F976E9 /* PhotoListView.swift in Sources */,
+				0250E51E26C0E4D900F976E9 /* AssetListView.swift in Sources */,
 				0250E51926C0D88100F976E9 /* Asset.swift in Sources */,
-				0250E52626C0F99B00F976E9 /* SharedAsset.swift in Sources */,
+				0250E52626C0F99B00F976E9 /* SharedPhoto.swift in Sources */,
+				0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */,
 				0250E50826C0D63000F976E9 /* PhotoWidgetApp.swift in Sources */,
+				0250E53026C11DD400F976E9 /* RefreshControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

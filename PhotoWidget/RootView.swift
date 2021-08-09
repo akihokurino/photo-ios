@@ -3,11 +3,11 @@ import SwiftUI
 
 enum RootTCA {
     static let reducer = Reducer<State, Action, Environment>.combine(
-        PhotoListTCA.reducer.optional().pullback(
+        AssetListTCA.reducer.optional().pullback(
             state: \RootTCA.State.photoList,
             action: /RootTCA.Action.photoList,
             environment: { _environment in
-                PhotoListTCA.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
+                AssetListTCA.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
             }
         ),
         SettingTCA.reducer.optional().pullback(
@@ -33,12 +33,12 @@ enum RootTCA {
 extension RootTCA {
     enum Action: Equatable {
         case onAppear
-        case photoList(PhotoListTCA.Action)
+        case photoList(AssetListTCA.Action)
         case setting(SettingTCA.Action)
     }
 
     struct State: Equatable {
-        var photoList: PhotoListTCA.State? = PhotoListTCA.State()
+        var photoList: AssetListTCA.State? = AssetListTCA.State()
         var setting: SettingTCA.State? = SettingTCA.State()
     }
 
@@ -60,7 +60,7 @@ struct RootView: View {
                             state: { $0.photoList },
                             action: RootTCA.Action.photoList
                         ),
-                        then: PhotoListView.init(store:)
+                        then: AssetListView.init(store:)
                     )
                 }
                 .tabItem {

@@ -3,21 +3,32 @@ import Foundation
 import Realm
 import RealmSwift
 
+private enum UserDefaultsKey {
+    static let suiteName = "group.com.photo-widget"
+    static let widgetIntents = "widgetIntents"
+}
+
 struct SharedDataStoreManager {
     let store = UserDefaults.standard
 
     static let shared = SharedDataStoreManager()
     private init() {}
 
-    func saveAsset(asset: SharedAsset) {
+    func saveAsset(asset: SharedPhoto) {
         saveWidgetIntent(.init(id: asset.id, createdAt: asset.createdAt))
-        let data = SharedAssetStore(value: asset)
+        let data = SharedPhotoRealmData(value: asset)
         RealmClient.shared.save(value: data)
     }
-    
-    func loadAsset() -> [SharedAsset] {
-        let data: [SharedAssetStore] = RealmClient.shared.load(storeType: .asset)
+
+    func loadAsset() -> [SharedPhoto] {
+        let data: [SharedPhotoRealmData] = RealmClient.shared.load(storeType: .photo)
         return data.map { $0.value }
+    }
+
+    func deleteAsset(asset: SharedPhoto) {
+        deleteWidgetIntent(id: asset.id)
+        let data = SharedPhotoRealmData(value: asset)
+        RealmClient.shared.delete(value: data)
     }
 
     private func getWidgetIntents() -> [WidgetIntent] {
@@ -37,31 +48,21 @@ struct SharedDataStoreManager {
         let value = try? JSONEncoder().encode(current + [intent])
         userDefaults.set(value, forKey: UserDefaultsKey.widgetIntents)
     }
-}
 
-struct WidgetIntent: Codable {
-    let id: String
-    let createdAt: Date
-}
-
-extension WidgetIntent: Comparable {
-    static func < (lhs: WidgetIntent, rhs: WidgetIntent) -> Bool {
-        lhs.createdAt < rhs.createdAt
+    private func deleteWidgetIntent(id: String) {
+        guard let userDefaults = UserDefaults(suiteName: UserDefaultsKey.suiteName) else { return }
+        var current: [WidgetIntent] = getWidgetIntents()
+        if current.isEmpty {
+            return
+        }
+        current.removeAll(where: { $0.id == id })
+        let value = try? JSONEncoder().encode(current)
+        userDefaults.set(value, forKey: UserDefaultsKey.widgetIntents)
     }
 }
 
-private enum UserDefaultsKey {
-    static let suiteName = "group.com.photo-widget"
-    static let widgetIntents = "widgetIntents"
-}
-
 enum RealmStoreType: String, Codable {
-    case asset
-}
-
-enum RealmError: Error {
-    case createRealm(Error)
-    case createCache
+    case photo
 }
 
 protocol RealmStoreCodable: Codable {
@@ -92,7 +93,7 @@ final class RealmClient {
 
     func hasKey(key: String) -> Bool {
         guard let realm = realm else { return false }
-        return realm.object(ofType: KVSModel.self, forPrimaryKey: key) != nil
+        return realm.object(ofType: RealmModel.self, forPrimaryKey: key) != nil
     }
 
     func load<T: RealmStoreCodable>(storeType: RealmStoreType) -> [T] {
@@ -100,7 +101,7 @@ final class RealmClient {
             return []
         }
 
-        let datas = realm.objects(KVSModel.self)
+        let datas = realm.objects(RealmModel.self)
         return datas
             .filter { data -> Bool in
                 data.storeType == storeType.rawValue
@@ -117,7 +118,7 @@ final class RealmClient {
     func get<T: RealmStoreCodable>(key: String) -> T? {
         guard
             let realm = realm,
-            let cache = realm.object(ofType: KVSModel.self, forPrimaryKey: key),
+            let cache = realm.object(ofType: RealmModel.self, forPrimaryKey: key),
             let cacheValue = cache.value
         else {
             return nil
@@ -131,7 +132,7 @@ final class RealmClient {
         let storeType = value.storeType
         guard let data = try? JSONEncoder().encode(value) else { return }
         try? realm?.write {
-            let kvs = KVSModel()
+            let kvs = RealmModel()
             kvs.key = key
             kvs.value = data
             kvs.storeType = storeType.rawValue
@@ -139,15 +140,15 @@ final class RealmClient {
         }
     }
 
-    func delete(primaryKey: String) {
-        guard let object = realm?.object(ofType: KVSModel.self, forPrimaryKey: primaryKey) else { return }
+    func delete<T: RealmStoreCodable>(value: T) {
+        guard let object = realm?.object(ofType: RealmModel.self, forPrimaryKey: value.key) else { return }
         try? realm?.write {
             self.realm?.delete(object)
         }
     }
 }
 
-final class KVSModel: Object {
+final class RealmModel: Object {
     @objc dynamic var key: String?
     @objc dynamic var value: Data?
     @objc dynamic var storeType: String?

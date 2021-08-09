@@ -9,6 +9,20 @@ enum SettingTCA {
             case .onAppear:
                 state.savedAsset = SharedDataStoreManager.shared.loadAsset()
                 return .none
+            case .refresh:
+                state.isRefreshing = true
+                state.savedAsset = SharedDataStoreManager.shared.loadAsset()
+                state.isRefreshing = false
+                return .none
+            case .delete(let photo):
+                SharedDataStoreManager.shared.deleteAsset(asset: photo)
+                state.isPresentedAlert = true
+                state.alertText = "削除しました"
+                state.savedAsset = SharedDataStoreManager.shared.loadAsset()
+                return .none
+            case .isPresentedAlert(let val):
+                state.isPresentedAlert = val
+                return .none
             }
         }
     )
@@ -17,10 +31,16 @@ enum SettingTCA {
 extension SettingTCA {
     enum Action: Equatable {
         case onAppear
+        case refresh
+        case delete(SharedPhoto)
+        case isPresentedAlert(Bool)
     }
 
     struct State: Equatable {
-        var savedAsset: [SharedAsset] = []
+        var savedAsset: [SharedPhoto] = []
+        var isRefreshing = false
+        var isPresentedAlert = false
+        var alertText = ""
     }
 
     struct Environment {
@@ -35,24 +55,60 @@ struct SettingView: View {
     private let gridItemLayout = [
         GridItem(.flexible()),
         GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
     ]
 
-    static let thumbnailSize = UIScreen.main.bounds.size.width / 4
+    @State private var isShowActionSheet = false
+    @State private var selectedPhoto: SharedPhoto? = nil
+    static let thumbnailSize = UIScreen.main.bounds.size.width / 2
 
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
+                RefreshControl(isRefreshing: Binding(
+                    get: { viewStore.isRefreshing },
+                    set: { _ in }
+                ), coordinateSpaceName: "RefreshControl", onRefresh: {
+                    viewStore.send(.refresh)
+                })
+
+                Text("保存した画像")
+                    .foregroundColor(Color.black)
+                    .font(Font.system(size: 15.0))
+                    .fontWeight(.bold)
+                    .padding()
+
                 LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {
-                    ForEach(viewStore.savedAsset, id: \.self) { asset in
-                        SharedAssetRow(asset: asset)
-                            .frame(maxWidth: SettingView.thumbnailSize)
-                            .frame(height: SettingView.thumbnailSize)
+                    ForEach(viewStore.savedAsset, id: \.self) { photo in
+                        Button(action: {
+                            selectedPhoto = photo
+                            isShowActionSheet = true
+                        }) {
+                            SharedPhotoRow(photo: photo)
+                                .frame(maxWidth: SettingView.thumbnailSize)
+                                .frame(height: SettingView.thumbnailSize)
+                        }
                     }
                 }
             }
             .navigationBarTitle("設定", displayMode: .inline)
+            .actionSheet(isPresented: $isShowActionSheet) {
+                ActionSheet(title: Text("選択してください"), buttons:
+                    [
+                        .destructive(Text("削除")) {
+                            guard let photo = selectedPhoto else {
+                                return
+                            }
+                            viewStore.send(.delete(photo))
+                        },
+                        .cancel(Text("キャンセル")),
+                    ])
+            }
+            .alert(isPresented: viewStore.binding(
+                get: \.isPresentedAlert,
+                send: SettingTCA.Action.isPresentedAlert
+            )) {
+                Alert(title: Text(viewStore.alertText))
+            }
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -60,19 +116,26 @@ struct SettingView: View {
     }
 }
 
-struct SharedAssetRow: View {
-    let asset: SharedAsset
+struct SharedPhotoRow: View {
+    let photo: SharedPhoto
 
     private let thumbnailSize = CGSize(width: SettingView.thumbnailSize, height: SettingView.thumbnailSize)
 
     var body: some View {
         HStack {
-            Image(uiImage: UIImage(data: asset.imageData!)!)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: thumbnailSize.width)
-                .frame(height: thumbnailSize.height)
-                .clipped()
+            if let data = photo.imageData {
+                Image(uiImage: UIImage(data: data)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: thumbnailSize.width)
+                    .frame(height: thumbnailSize.height)
+                    .clipped()
+            } else {
+                Color
+                    .gray
+                    .frame(width: thumbnailSize.width)
+                    .frame(height: thumbnailSize.height)
+            }
         }
     }
 }

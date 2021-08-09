@@ -25,13 +25,18 @@ struct SharedDataStoreManager {
         return data.map { $0.value }
     }
 
+    func getAsset(id: String) -> SharedPhoto? {
+        let data: SharedPhotoRealmData? = RealmClient.shared.get(key: id)
+        return data?.value
+    }
+
     func deleteAsset(asset: SharedPhoto) {
         deleteWidgetIntent(id: asset.id)
         let data = SharedPhotoRealmData(value: asset)
         RealmClient.shared.delete(value: data)
     }
 
-    private func getWidgetIntents() -> [WidgetIntent] {
+    func getWidgetIntents() -> [WidgetIntent] {
         guard let userDefaults = UserDefaults(suiteName: UserDefaultsKey.suiteName) else { return [] }
         if let data = userDefaults.object(forKey: UserDefaultsKey.widgetIntents) as? Data,
            let intents = try? JSONDecoder().decode([WidgetIntent].self, from: data)

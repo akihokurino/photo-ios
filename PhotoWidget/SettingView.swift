@@ -75,10 +75,11 @@ struct SettingView: View {
                     viewStore.send(.refresh)
                 })
 
-                Text("Widgetに表示する画像")
+                Text("Widgetに表示する画像\n（ランダムに5つ表示されます）")
                     .foregroundColor(Color.white)
                     .font(Font.system(size: 15.0))
                     .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
                     .padding()
 
                 LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {

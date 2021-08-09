@@ -27,7 +27,7 @@ enum AssetListTCA {
                 state.assets = assets
                 return .none
             case .save(let asset):
-                return PhotosManager.requestImage(asset: asset, targetSize: CGSize(width: 1000, height: 1000))
+                return PhotosManager.requestImage(asset: asset, targetSize: CGSize(width: 300, height: 300))
                     .flatMap { image in
                         Future<Asset, Never> { promise in
                             let sharedAsset = SharedPhoto(photosId: asset.id, imageData: image?.pngData())

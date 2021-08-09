@@ -2,6 +2,8 @@ import Intents
 import SwiftUI
 import WidgetKit
 
+let MAX_PHOTO_NUM = 4
+
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), data: nil, configuration: ConfigurationIntent())
@@ -14,36 +16,30 @@ struct Provider: IntentTimelineProvider {
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
-        let photos = SharedDataStoreManager.shared.loadAsset()
-//        var usePhotos: [SharedPhoto] = []
-//
-//        if photos.count < MAX_PHOTO_NUM {
-//            loop: while true {
-//                for photo in photos {
-//                    usePhotos.append(photo)
-//
-//                    if usePhotos.count >= MAX_PHOTO_NUM {
-//                        break loop
-//                    }
-//                }
-//
-//                if usePhotos.count >= MAX_PHOTO_NUM {
-//                    break loop
-//                }
-//            }
-//        } else {
-//            usePhotos = photos[0 ..< MAX_PHOTO_NUM].map { $0 }
-//        }
-//
-//        let currentDate = Date()
-//        for minOffset in 0 ..< 60 {
-//            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset, to: currentDate)!
-//            let entry = SimpleEntry(date: entryDate, data: usePhotos[minOffset], configuration: configuration)
-//            entries.append(entry)
-//        }
+        let intents = SharedDataStoreManager.shared.getWidgetIntents()
+        var usePhotos: [SharedPhoto] = []
 
-        let entry = SimpleEntry(date: Date(), data: photos.first, configuration: configuration)
-        entries.append(entry)
+        loop: while true {
+            for intent in intents.shuffled() {
+                let photo = SharedDataStoreManager.shared.getAsset(id: intent.id)!
+                usePhotos.append(photo)
+
+                if usePhotos.count >= MAX_PHOTO_NUM {
+                    break loop
+                }
+            }
+
+            if usePhotos.count >= MAX_PHOTO_NUM {
+                break loop
+            }
+        }
+
+        let currentDate = Date()
+        for minOffset in 0 ..< MAX_PHOTO_NUM {
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset, to: currentDate)!
+            let entry = SimpleEntry(date: entryDate, data: usePhotos[minOffset], configuration: configuration)
+            entries.append(entry)
+        }
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)

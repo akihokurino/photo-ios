@@ -34,6 +34,7 @@
 		0250E54E26C1349D00F976E9 /* SharedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52526C0F99B00F976E9 /* SharedPhoto.swift */; };
 		0250E55026C1359400F976E9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E54F26C1359400F976E9 /* Realm */; };
 		0250E55226C1359400F976E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E55126C1359400F976E9 /* RealmSwift */; };
+		0250E55526C1746F00F976E9 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E55326C1743700F976E9 /* WidgetBundle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		0250E54026C128E400F976E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0250E54A26C1293100F976E9 /* PhotoWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoWidget.entitlements; sourceTree = "<group>"; };
 		0250E54B26C1297900F976E9 /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
+		0250E55326C1743700F976E9 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				0250E53B26C128E200F976E9 /* Widget.swift */,
+				0250E55326C1743700F976E9 /* WidgetBundle.swift */,
 				0250E53D26C128E200F976E9 /* Widget.intentdefinition */,
 				0250E53E26C128E300F976E9 /* Assets.xcassets */,
 				0250E54026C128E400F976E9 /* Info.plist */,
@@ -322,6 +325,7 @@
 				0250E54D26C1349D00F976E9 /* SharedDataStoreManager.swift in Sources */,
 				0250E54E26C1349D00F976E9 /* SharedPhoto.swift in Sources */,
 				0250E54126C128E400F976E9 /* Widget.intentdefinition in Sources */,
+				0250E55526C1746F00F976E9 /* WidgetBundle.swift in Sources */,
 				0250E54C26C1349D00F976E9 /* WidgetIntent.swift in Sources */,
 				0250E53C26C128E200F976E9 /* Widget.swift in Sources */,
 			);

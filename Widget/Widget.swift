@@ -11,6 +11,9 @@ extension Array {
 }
 
 struct SinglePhotoProvider: IntentTimelineProvider {
+    typealias Intent = ConfigurationIntent
+    typealias Entry = SinglePhotoEntry
+
     func placeholder(in context: Context) -> SinglePhotoEntry {
         SinglePhotoEntry(date: Date(), data: nil, configuration: ConfigurationIntent())
     }
@@ -42,9 +45,21 @@ struct SinglePhotoProvider: IntentTimelineProvider {
             }
         }
 
+        var interval: Int = 1
+        switch configuration.minutesInterval {
+        case MinutesInterval.unknown:
+            interval = 1
+        case MinutesInterval.five:
+            interval = 5
+        case MinutesInterval.ten:
+            interval = 10
+        case MinutesInterval.fifteen:
+            interval = 15
+        }
+
         let currentDate = Date()
         for minOffset in 0 ..< MAX_PHOTO_NUM {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * interval, to: currentDate)!
             let entry = SinglePhotoEntry(date: entryDate, data: usePhotos[minOffset], configuration: configuration)
             entries.append(entry)
         }
@@ -65,10 +80,20 @@ struct SinglePhotoWidgetEntryView: View {
 
     var body: some View {
         if let data = entry.data?.imageData {
-            Image(uiImage: UIImage(data: data)!)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .clipped()
+            ZStack {
+                Image(uiImage: UIImage(data: data)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+
+                if (entry.configuration.isShowMessage ?? 0) == 1 {
+                    Text(entry.configuration.message ?? "")
+                        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+                        .font(Font.system(size: 14.0))
+                        .background(Color.black)
+                        .foregroundColor(Color.white)
+                }
+            }
         }
     }
 }
@@ -118,11 +143,23 @@ struct WidePhotoProvider: IntentTimelineProvider {
             }
         }
 
+        var interval: Int = 1
+        switch configuration.minutesInterval {
+        case MinutesInterval.unknown:
+            interval = 1
+        case MinutesInterval.five:
+            interval = 5
+        case MinutesInterval.ten:
+            interval = 10
+        case MinutesInterval.fifteen:
+            interval = 15
+        }
+
         let chunked = usePhotos.chunked(by: 2)
 
         let currentDate = Date()
         for minOffset in 0 ..< MAX_PHOTO_NUM / 2 {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * interval, to: currentDate)!
             let entry = WidePhotoEntry(
                 date: entryDate,
                 data1: chunked[minOffset][0],
@@ -148,20 +185,30 @@ struct WidePhotoWidgetEntryView: View {
 
     var body: some View {
         GeometryReader { geo in
-            HStack {
-                if let data = entry.data1?.imageData {
-                    Image(uiImage: UIImage(data: data)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
-                        .clipped()
+            ZStack {
+                HStack {
+                    if let data = entry.data1?.imageData {
+                        Image(uiImage: UIImage(data: data)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
+                            .clipped()
+                    }
+                    if let data = entry.data2?.imageData {
+                        Image(uiImage: UIImage(data: data)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
+                            .clipped()
+                    }
                 }
-                if let data = entry.data2?.imageData {
-                    Image(uiImage: UIImage(data: data)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
-                        .clipped()
+
+                if (entry.configuration.isShowMessage ?? 0) == 1 {
+                    Text(entry.configuration.message ?? "")
+                        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+                        .font(Font.system(size: 14.0))
+                        .background(Color.black)
+                        .foregroundColor(Color.white)
                 }
             }
         }
@@ -225,9 +272,21 @@ struct LargePhotoProvider: IntentTimelineProvider {
             }
         }
 
+        var interval: Int = 1
+        switch configuration.minutesInterval {
+        case MinutesInterval.unknown:
+            interval = 1
+        case MinutesInterval.five:
+            interval = 5
+        case MinutesInterval.ten:
+            interval = 10
+        case MinutesInterval.fifteen:
+            interval = 15
+        }
+
         let currentDate = Date()
         for minOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * interval, to: currentDate)!
             let entry = LargePhotoEntry(
                 date: entryDate,
                 data1: usePhotos[0],
@@ -257,42 +316,52 @@ struct LargePhotoWidgetEntryView: View {
 
     var body: some View {
         GeometryReader { geo in
-            VStack(alignment: .center) {
-                HStack {
-                    if let data = entry.data1?.imageData {
-                        Image(uiImage: UIImage(data: data)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
-                            .clipped()
+            ZStack {
+                VStack(alignment: .center) {
+                    HStack {
+                        if let data = entry.data1?.imageData {
+                            Image(uiImage: UIImage(data: data)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
+                                .clipped()
+                        }
+                        if let data = entry.data2?.imageData {
+                            Image(uiImage: UIImage(data: data)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
+                                .clipped()
+                        }
                     }
-                    if let data = entry.data2?.imageData {
-                        Image(uiImage: UIImage(data: data)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
-                            .clipped()
-                    }
-                }
-                .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
+                    .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
 
-                HStack {
-                    if let data = entry.data3?.imageData {
-                        Image(uiImage: UIImage(data: data)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
-                            .clipped()
+                    HStack {
+                        if let data = entry.data3?.imageData {
+                            Image(uiImage: UIImage(data: data)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
+                                .clipped()
+                        }
+                        if let data = entry.data4?.imageData {
+                            Image(uiImage: UIImage(data: data)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
+                                .clipped()
+                        }
                     }
-                    if let data = entry.data4?.imageData {
-                        Image(uiImage: UIImage(data: data)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width / 2, height: geo.size.width / 2, alignment: .center)
-                            .clipped()
-                    }
+                    .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
                 }
-                .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
+
+                if (entry.configuration.isShowMessage ?? 0) == 1 {
+                    Text(entry.configuration.message ?? "")
+                        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+                        .font(Font.system(size: 14.0))
+                        .background(Color.black)
+                        .foregroundColor(Color.white)
+                }
             }
         }
     }

@@ -35,6 +35,15 @@
 		0250E55026C1359400F976E9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E54F26C1359400F976E9 /* Realm */; };
 		0250E55226C1359400F976E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E55126C1359400F976E9 /* RealmSwift */; };
 		0250E55526C1746F00F976E9 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E55326C1743700F976E9 /* WidgetBundle.swift */; };
+		02BCF7D626C8C2EB0015C852 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BCF7D526C8C2EB0015C852 /* Intents.framework */; };
+		02BCF7D926C8C2EB0015C852 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BCF7D826C8C2EB0015C852 /* IntentHandler.swift */; };
+		02BCF7DD26C8C2EB0015C852 /* Intent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 02BCF7D426C8C2EB0015C852 /* Intent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		02BCF7E126C8C3B30015C852 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0250E53D26C128E200F976E9 /* Widget.intentdefinition */; };
+		02BCF7E226C8C5580015C852 /* SharedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52526C0F99B00F976E9 /* SharedPhoto.swift */; };
+		02BCF7E326C8C5580015C852 /* WidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */; };
+		02BCF7E426C8C5580015C852 /* SharedDataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */; };
+		02BCF7E626C8CDFD0015C852 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCF7E526C8CDFD0015C852 /* Realm */; };
+		02BCF7E826C8CDFD0015C852 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCF7E726C8CDFD0015C852 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +54,13 @@
 			remoteGlobalIDString = 0250E53426C128E200F976E9;
 			remoteInfo = WidgetExtension;
 		};
+		02BCF7DB26C8C2EB0015C852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0250E4FC26C0D63000F976E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02BCF7D326C8C2EB0015C852;
+			remoteInfo = Intent;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				02BCF7DD26C8C2EB0015C852 /* Intent.appex in Embed App Extensions */,
 				0250E54526C128E400F976E9 /* WidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -86,6 +103,10 @@
 		0250E54A26C1293100F976E9 /* PhotoWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoWidget.entitlements; sourceTree = "<group>"; };
 		0250E54B26C1297900F976E9 /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
 		0250E55326C1743700F976E9 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
+		02BCF7D426C8C2EB0015C852 /* Intent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Intent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		02BCF7D526C8C2EB0015C852 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		02BCF7D826C8C2EB0015C852 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		02BCF7DA26C8C2EB0015C852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +131,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02BCF7D126C8C2EB0015C852 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02BCF7E826C8CDFD0015C852 /* RealmSwift in Frameworks */,
+				02BCF7E626C8CDFD0015C852 /* Realm in Frameworks */,
+				02BCF7D626C8C2EB0015C852 /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -120,6 +151,7 @@
 				0250E52126C0F7D000F976E9 /* Shared */,
 				0250E50626C0D63000F976E9 /* PhotoWidget */,
 				0250E53A26C128E200F976E9 /* Widget */,
+				02BCF7D726C8C2EB0015C852 /* Intent */,
 				0250E50526C0D63000F976E9 /* Products */,
 				0250E52826C1050C00F976E9 /* Frameworks */,
 			);
@@ -130,6 +162,7 @@
 			children = (
 				0250E50426C0D63000F976E9 /* PhotoWidget.app */,
 				0250E53526C128E200F976E9 /* WidgetExtension.appex */,
+				02BCF7D426C8C2EB0015C852 /* Intent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,6 +208,7 @@
 			children = (
 				0250E53626C128E200F976E9 /* WidgetKit.framework */,
 				0250E53826C128E200F976E9 /* SwiftUI.framework */,
+				02BCF7D526C8C2EB0015C852 /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -189,6 +223,15 @@
 				0250E54026C128E400F976E9 /* Info.plist */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		02BCF7D726C8C2EB0015C852 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+				02BCF7D826C8C2EB0015C852 /* IntentHandler.swift */,
+				02BCF7DA26C8C2EB0015C852 /* Info.plist */,
+			);
+			path = Intent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +250,7 @@
 			);
 			dependencies = (
 				0250E54426C128E400F976E9 /* PBXTargetDependency */,
+				02BCF7DC26C8C2EB0015C852 /* PBXTargetDependency */,
 			);
 			name = PhotoWidget;
 			packageProductDependencies = (
@@ -239,6 +283,27 @@
 			productReference = 0250E53526C128E200F976E9 /* WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		02BCF7D326C8C2EB0015C852 /* Intent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02BCF7E026C8C2EB0015C852 /* Build configuration list for PBXNativeTarget "Intent" */;
+			buildPhases = (
+				02BCF7D026C8C2EB0015C852 /* Sources */,
+				02BCF7D126C8C2EB0015C852 /* Frameworks */,
+				02BCF7D226C8C2EB0015C852 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Intent;
+			packageProductDependencies = (
+				02BCF7E526C8CDFD0015C852 /* Realm */,
+				02BCF7E726C8CDFD0015C852 /* RealmSwift */,
+			);
+			productName = Intent;
+			productReference = 02BCF7D426C8C2EB0015C852 /* Intent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -252,6 +317,9 @@
 						CreatedOnToolsVersion = 12.5.1;
 					};
 					0250E53426C128E200F976E9 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					02BCF7D326C8C2EB0015C852 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
@@ -275,6 +343,7 @@
 			targets = (
 				0250E50326C0D63000F976E9 /* PhotoWidget */,
 				0250E53426C128E200F976E9 /* WidgetExtension */,
+				02BCF7D326C8C2EB0015C852 /* Intent */,
 			);
 		};
 /* End PBXProject section */
@@ -294,6 +363,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0250E53F26C128E400F976E9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02BCF7D226C8C2EB0015C852 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +407,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02BCF7D026C8C2EB0015C852 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02BCF7E126C8C3B30015C852 /* Widget.intentdefinition in Sources */,
+				02BCF7E426C8C5580015C852 /* SharedDataStoreManager.swift in Sources */,
+				02BCF7E226C8C5580015C852 /* SharedPhoto.swift in Sources */,
+				02BCF7D926C8C2EB0015C852 /* IntentHandler.swift in Sources */,
+				02BCF7E326C8C5580015C852 /* WidgetIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -338,6 +426,11 @@
 			isa = PBXTargetDependency;
 			target = 0250E53426C128E200F976E9 /* WidgetExtension */;
 			targetProxy = 0250E54326C128E400F976E9 /* PBXContainerItemProxy */;
+		};
+		02BCF7DC26C8C2EB0015C852 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02BCF7D326C8C2EB0015C852 /* Intent */;
+			targetProxy = 02BCF7DB26C8C2EB0015C852 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -556,6 +649,46 @@
 			};
 			name = Release;
 		};
+		02BCF7DE26C8C2EB0015C852 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 39KF2M8S75;
+				INFOPLIST_FILE = Intent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget.Intent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		02BCF7DF26C8C2EB0015C852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 39KF2M8S75;
+				INFOPLIST_FILE = Intent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget.Intent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -582,6 +715,15 @@
 			buildConfigurations = (
 				0250E54726C128E400F976E9 /* Debug */,
 				0250E54826C128E400F976E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02BCF7E026C8C2EB0015C852 /* Build configuration list for PBXNativeTarget "Intent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02BCF7DE26C8C2EB0015C852 /* Debug */,
+				02BCF7DF26C8C2EB0015C852 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -629,6 +771,16 @@
 			productName = Realm;
 		};
 		0250E55126C1359400F976E9 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0250E52726C103E600F976E9 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+		02BCF7E526C8CDFD0015C852 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0250E52726C103E600F976E9 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		02BCF7E726C8CDFD0015C852 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0250E52726C103E600F976E9 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;

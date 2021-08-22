@@ -27,11 +27,21 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>5分ごと</string>
+					<string>1分ごと</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>an4mIR</string>
+					<string>hFuRUN</string>
 					<key>INEnumValueIndex</key>
 					<integer>1</integer>
+					<key>INEnumValueName</key>
+					<string>one</string>
+				</dict>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>5分ごと</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>acj9IU</string>
+					<key>INEnumValueIndex</key>
+					<integer>2</integer>
 					<key>INEnumValueName</key>
 					<string>five</string>
 				</dict>
@@ -39,9 +49,9 @@
 					<key>INEnumValueDisplayName</key>
 					<string>10分ごと</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>PXtgNh</string>
+					<string>KfxoKP</string>
 					<key>INEnumValueIndex</key>
-					<integer>2</integer>
+					<integer>3</integer>
 					<key>INEnumValueName</key>
 					<string>ten</string>
 				</dict>
@@ -49,9 +59,9 @@
 					<key>INEnumValueDisplayName</key>
 					<string>15分ごと</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>rb9Aau</string>
+					<string>zjOgpv</string>
 					<key>INEnumValueIndex</key>
-					<integer>3</integer>
+					<integer>4</integer>
 					<key>INEnumValueName</key>
 					<string>fifteen</string>
 				</dict>
@@ -116,26 +126,6 @@
 							<true/>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${message}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>SO1voD</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${message}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>LDcuI8</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
 						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>

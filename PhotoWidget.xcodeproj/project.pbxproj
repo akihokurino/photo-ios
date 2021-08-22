@@ -44,6 +44,7 @@
 		02BCF7E426C8C5580015C852 /* SharedDataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */; };
 		02BCF7E626C8CDFD0015C852 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCF7E526C8CDFD0015C852 /* Realm */; };
 		02BCF7E826C8CDFD0015C852 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCF7E726C8CDFD0015C852 /* RealmSwift */; };
+		02C97F8326D22AC500560E88 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C97F8226D22AC500560E88 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		02BCF7D526C8C2EB0015C852 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		02BCF7D826C8C2EB0015C852 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		02BCF7DA26C8C2EB0015C852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02C97F8226D22AC500560E88 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				0250E51826C0D88100F976E9 /* Asset.swift */,
 				0250E52F26C11DD400F976E9 /* RefreshControl.swift */,
 				0250E50B26C0D63200F976E9 /* Assets.xcassets */,
+				02C97F8226D22AC500560E88 /* Colors.xcassets */,
 				0250E51026C0D63200F976E9 /* Info.plist */,
 				0250E50D26C0D63200F976E9 /* Preview Content */,
 			);
@@ -353,6 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C97F8326D22AC500560E88 /* Colors.xcassets in Resources */,
 				0250E50F26C0D63200F976E9 /* Preview Assets.xcassets in Resources */,
 				0250E50C26C0D63200F976E9 /* Assets.xcassets in Resources */,
 			);

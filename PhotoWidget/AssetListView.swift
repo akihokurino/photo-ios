@@ -5,7 +5,7 @@ import WidgetKit
 
 enum AssetListTCA {
     static let reducer = Reducer<State, Action, Environment>.combine(
-        Reducer { state, action, _ in
+        Reducer { state, action, environment in
             switch action {
             case .onAppear:
                 return PhotosManager.requestAuthorization()
@@ -14,10 +14,14 @@ enum AssetListTCA {
             case .refresh:
                 state.isRefreshing = true
                 return PhotosManager.fetchAssets()
+                    .subscribe(on: environment.backgroundQueue)
+                    .receive(on: environment.mainQueue)
                     .eraseToEffect()
                     .map(AssetListTCA.Action.assets)
             case .authorized(.authorized):
                 return PhotosManager.fetchAssets()
+                    .subscribe(on: environment.backgroundQueue)
+                    .receive(on: environment.mainQueue)
                     .eraseToEffect()
                     .map(AssetListTCA.Action.assets)
             case .authorized(let status):
@@ -35,14 +39,16 @@ enum AssetListTCA {
                             promise(.success(asset))
                         }
                     }
+                    .subscribe(on: environment.backgroundQueue)
+                    .receive(on: environment.mainQueue)
                     .eraseToEffect()
                     .map(AssetListTCA.Action.saved)
             case .saved(let asset):
                 state.isPresentedAlert = true
-                state.alertText = "写真を保存しました"
-                
+                state.alertText = "写真を追加しました"
+
                 WidgetCenter.shared.reloadAllTimelines()
-                
+
                 return .none
             case .isPresentedAlert(let val):
                 state.isPresentedAlert = val
@@ -118,7 +124,7 @@ struct AssetListView: View {
             .actionSheet(isPresented: $isShowActionSheet) {
                 ActionSheet(title: Text("選択してください"), buttons:
                     [
-                        .default(Text("Widgetに表示する")) {
+                        .default(Text("ホームに表示する")) {
                             guard let asset = selectedAsset else {
                                 return
                             }

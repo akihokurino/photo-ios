@@ -45,21 +45,9 @@ struct SinglePhotoProvider: IntentTimelineProvider {
             }
         }
 
-        var interval: Int = 1
-        switch configuration.minutesInterval {
-        case MinutesInterval.unknown:
-            interval = 1
-        case MinutesInterval.five:
-            interval = 5
-        case MinutesInterval.ten:
-            interval = 10
-        case MinutesInterval.fifteen:
-            interval = 15
-        }
-
         let currentDate = Date()
         for minOffset in 0 ..< MAX_PHOTO_NUM {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * interval, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * configuration.interval, to: currentDate)!
             let entry = SinglePhotoEntry(date: entryDate, data: usePhotos[minOffset], configuration: configuration)
             entries.append(entry)
         }
@@ -143,23 +131,11 @@ struct WidePhotoProvider: IntentTimelineProvider {
             }
         }
 
-        var interval: Int = 1
-        switch configuration.minutesInterval {
-        case MinutesInterval.unknown:
-            interval = 1
-        case MinutesInterval.five:
-            interval = 5
-        case MinutesInterval.ten:
-            interval = 10
-        case MinutesInterval.fifteen:
-            interval = 15
-        }
-
         let chunked = usePhotos.chunked(by: 2)
 
         let currentDate = Date()
         for minOffset in 0 ..< MAX_PHOTO_NUM / 2 {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * interval, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * configuration.interval, to: currentDate)!
             let entry = WidePhotoEntry(
                 date: entryDate,
                 data1: chunked[minOffset][0],
@@ -272,21 +248,9 @@ struct LargePhotoProvider: IntentTimelineProvider {
             }
         }
 
-        var interval: Int = 1
-        switch configuration.minutesInterval {
-        case MinutesInterval.unknown:
-            interval = 1
-        case MinutesInterval.five:
-            interval = 5
-        case MinutesInterval.ten:
-            interval = 10
-        case MinutesInterval.fifteen:
-            interval = 15
-        }
-
         let currentDate = Date()
         for minOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * interval, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minOffset * configuration.interval, to: currentDate)!
             let entry = LargePhotoEntry(
                 date: entryDate,
                 data1: usePhotos[0],
@@ -334,7 +298,8 @@ struct LargePhotoWidgetEntryView: View {
                                 .clipped()
                         }
                     }
-                    .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
+                    .frame(width: geo.size.width, alignment: .center)
+                    .padding(.top, 4)
 
                     HStack {
                         if let data = entry.data3?.imageData {
@@ -352,7 +317,7 @@ struct LargePhotoWidgetEntryView: View {
                                 .clipped()
                         }
                     }
-                    .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
+                    .frame(width: geo.size.width, alignment: .center)
                 }
 
                 if (entry.configuration.isShowMessage ?? 0) == 1 {
@@ -377,5 +342,22 @@ struct LargePhotoWidget: Widget {
         .configurationDisplayName("ラージ")
         .description("写真4枚で構成するWidget")
         .supportedFamilies([.systemLarge])
+    }
+}
+
+extension ConfigurationIntent {
+    var interval: Int {
+        switch self.minutesInterval {
+        case MinutesInterval.unknown:
+            return 1
+        case MinutesInterval.one:
+            return 1
+        case MinutesInterval.five:
+            return 5
+        case MinutesInterval.ten:
+            return 10
+        case MinutesInterval.fifteen:
+            return 15
+        }
     }
 }

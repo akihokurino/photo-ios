@@ -17,7 +17,7 @@ enum PhotosManager {
     static func fetchAssets() -> Future<[Asset], Never> {
         return Future<[Asset], Never> { promise in
             let fetchOptions = PHFetchOptions()
-            fetchOptions.fetchLimit = 500
+            fetchOptions.fetchLimit = 1000
             fetchOptions.sortDescriptors = [
                 NSSortDescriptor(key: "creationDate", ascending: false)
             ]

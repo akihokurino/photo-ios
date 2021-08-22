@@ -4,12 +4,14 @@ import UIKit
 
 final class Asset: ObservableObject {
     let id: String
-    @Published var image: UIImage? = nil
     let asset: PHAsset
-    private var manager = PHImageManager.default()
+    let manager = PHImageManager.default()
+    
+    @Published var image: UIImage? = nil
 
-    func request(with targetSize: CGSize) {
+    func request(with targetSize: CGSize, callback: @escaping (UIImage?) -> Void) {
         guard self.image == nil else {
+            callback(self.image)
             return
         }
         
@@ -24,6 +26,7 @@ final class Asset: ObservableObject {
             ) { [weak self] image, _ in
                 DispatchQueue.main.async {
                     self?.image = image
+                    callback(image)
                 }
             }
         }

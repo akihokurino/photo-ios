@@ -148,12 +148,13 @@ struct AssetListView: View {
 
 struct AssetRow: View {
     @ObservedObject var asset: Asset
+    @State var image: UIImage? = nil
 
     private let thumbnailSize = CGSize(width: AssetListView.thumbnailSize, height: AssetListView.thumbnailSize)
 
     var body: some View {
         HStack {
-            if let image = asset.image {
+            if let image = image {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -169,7 +170,9 @@ struct AssetRow: View {
             }
         }
         .onAppear {
-            asset.request(with: CGSize(width: AssetListView.thumbnailSize * 2, height: AssetListView.thumbnailSize * 2))
+            asset.request(with: CGSize(width: AssetListView.thumbnailSize * 2, height: AssetListView.thumbnailSize * 2)) { image in
+                self.image = image
+            }
         }
     }
 }

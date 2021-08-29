@@ -3,27 +3,27 @@ import ComposableArchitecture
 import SwiftUI
 import WidgetKit
 
-enum AssetListTCA {
+enum AssetListVM {
     static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, environment in
             switch action {
             case .onAppear:
                 return PhotosManager.requestAuthorization()
                     .eraseToEffect()
-                    .map(AssetListTCA.Action.authorized)
+                    .map(AssetListVM.Action.authorized)
             case .refresh:
                 state.isRefreshing = true
                 return PhotosManager.fetchAssets()
                     .subscribe(on: environment.backgroundQueue)
                     .receive(on: environment.mainQueue)
                     .eraseToEffect()
-                    .map(AssetListTCA.Action.assets)
+                    .map(AssetListVM.Action.assets)
             case .authorized(.authorized):
                 return PhotosManager.fetchAssets()
                     .subscribe(on: environment.backgroundQueue)
                     .receive(on: environment.mainQueue)
                     .eraseToEffect()
-                    .map(AssetListTCA.Action.assets)
+                    .map(AssetListVM.Action.assets)
             case .authorized(let status):
                 return .none
             case .assets(let assets):
@@ -42,7 +42,7 @@ enum AssetListTCA {
                     .subscribe(on: environment.backgroundQueue)
                     .receive(on: environment.mainQueue)
                     .eraseToEffect()
-                    .map(AssetListTCA.Action.saved)
+                    .map(AssetListVM.Action.saved)
             case .saved(let asset):
                 state.isPresentedAlert = true
                 state.alertText = "写真を追加しました"
@@ -58,7 +58,7 @@ enum AssetListTCA {
     )
 }
 
-extension AssetListTCA {
+extension AssetListVM {
     enum Action: Equatable {
         case onAppear
         case refresh
@@ -83,7 +83,7 @@ extension AssetListTCA {
 }
 
 struct AssetListView: View {
-    let store: Store<AssetListTCA.State, AssetListTCA.Action>
+    let store: Store<AssetListVM.State, AssetListVM.Action>
 
     private let gridItemLayout = [
         GridItem(.flexible()),
@@ -135,7 +135,7 @@ struct AssetListView: View {
             }
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
-                send: AssetListTCA.Action.isPresentedAlert
+                send: AssetListVM.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
@@ -180,9 +180,9 @@ struct AssetRow: View {
 struct AssetListView_Previews: PreviewProvider {
     static var previews: some View {
         AssetListView(store: .init(
-            initialState: AssetListTCA.State(),
+            initialState: AssetListVM.State(),
             reducer: .empty,
-            environment: AssetListTCA.Environment(
+            environment: AssetListVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

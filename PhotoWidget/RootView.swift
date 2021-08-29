@@ -1,20 +1,20 @@
 import ComposableArchitecture
 import SwiftUI
 
-enum RootTCA {
+enum RootVM {
     static let reducer = Reducer<State, Action, Environment>.combine(
-        AssetListTCA.reducer.optional().pullback(
-            state: \RootTCA.State.photoList,
-            action: /RootTCA.Action.photoList,
+        AssetListVM.reducer.optional().pullback(
+            state: \RootVM.State.photoList,
+            action: /RootVM.Action.photoList,
             environment: { _environment in
-                AssetListTCA.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
+                AssetListVM.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
             }
         ),
-        SettingTCA.reducer.optional().pullback(
-            state: \RootTCA.State.setting,
-            action: /RootTCA.Action.setting,
+        SettingVM.reducer.optional().pullback(
+            state: \RootVM.State.setting,
+            action: /RootVM.Action.setting,
             environment: { _environment in
-                SettingTCA.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
+                SettingVM.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
             }
         ),
         Reducer { _, action, _ in
@@ -30,16 +30,16 @@ enum RootTCA {
     )
 }
 
-extension RootTCA {
+extension RootVM {
     enum Action: Equatable {
         case onAppear
-        case photoList(AssetListTCA.Action)
-        case setting(SettingTCA.Action)
+        case photoList(AssetListVM.Action)
+        case setting(SettingVM.Action)
     }
 
     struct State: Equatable {
-        var photoList: AssetListTCA.State? = AssetListTCA.State()
-        var setting: SettingTCA.State? = SettingTCA.State()
+        var photoList: AssetListVM.State? = AssetListVM.State()
+        var setting: SettingVM.State? = SettingVM.State()
     }
 
     struct Environment {
@@ -49,7 +49,7 @@ extension RootTCA {
 }
 
 struct RootView: View {
-    let store: Store<RootTCA.State, RootTCA.Action>
+    let store: Store<RootVM.State, RootVM.Action>
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -58,7 +58,7 @@ struct RootView: View {
                     IfLetStore(
                         store.scope(
                             state: { $0.photoList },
-                            action: RootTCA.Action.photoList
+                            action: RootVM.Action.photoList
                         ),
                         then: AssetListView.init(store:)
                     )
@@ -74,7 +74,7 @@ struct RootView: View {
                     IfLetStore(
                         store.scope(
                             state: { $0.setting },
-                            action: RootTCA.Action.setting
+                            action: RootVM.Action.setting
                         ),
                         then: SettingView.init(store:)
                     )
@@ -96,9 +96,9 @@ struct RootView: View {
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView(store: .init(
-            initialState: RootTCA.State(),
+            initialState: RootVM.State(),
             reducer: .empty,
-            environment: RootTCA.Environment(
+            environment: RootVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

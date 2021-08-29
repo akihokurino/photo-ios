@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 import WidgetKit
 
-enum SettingTCA {
+enum SettingVM {
     static let reducer = Reducer<State, Action, Environment>.combine(
         Reducer { state, action, _ in
             switch action {
@@ -32,7 +32,7 @@ enum SettingTCA {
     )
 }
 
-extension SettingTCA {
+extension SettingVM {
     enum Action: Equatable {
         case onAppear
         case refresh
@@ -54,7 +54,7 @@ extension SettingTCA {
 }
 
 struct SettingView: View {
-    let store: Store<SettingTCA.State, SettingTCA.Action>
+    let store: Store<SettingVM.State, SettingVM.Action>
 
     private let gridItemLayout = [
         GridItem(.flexible()),
@@ -110,7 +110,7 @@ struct SettingView: View {
             }
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
-                send: SettingTCA.Action.isPresentedAlert
+                send: SettingVM.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
@@ -148,9 +148,9 @@ struct SharedPhotoRow: View {
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         SettingView(store: .init(
-            initialState: SettingTCA.State(),
+            initialState: SettingVM.State(),
             reducer: .empty,
-            environment: SettingTCA.Environment(
+            environment: SettingVM.Environment(
                 mainQueue: .main,
                 backgroundQueue: .init(DispatchQueue.global(qos: .background))
             )

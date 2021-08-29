@@ -5,10 +5,10 @@ import SwiftUI
 struct PhotoWidgetApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
-    let store: Store<RootTCA.State, RootTCA.Action> = Store(
-        initialState: RootTCA.State(),
-        reducer: RootTCA.reducer,
-        environment: RootTCA.Environment(
+    let store: Store<RootVM.State, RootVM.Action> = Store(
+        initialState: RootVM.State(),
+        reducer: RootVM.reducer,
+        environment: RootVM.Environment(
             mainQueue: .main,
             backgroundQueue: .init(DispatchQueue.global(qos: .background))
         )

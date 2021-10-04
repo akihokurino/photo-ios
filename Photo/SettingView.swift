@@ -10,11 +10,6 @@ enum SettingVM {
             case .onAppear:
                 state.selectedPhotos = SharedDataStoreManager.shared.loadAsset()
                 return .none
-            case .refresh:
-                state.isRefreshing = true
-                state.selectedPhotos = SharedDataStoreManager.shared.loadAsset()
-                state.isRefreshing = false
-                return .none
             case .delete(let photo):
                 SharedDataStoreManager.shared.deleteAsset(asset: photo)
                 state.isPresentedAlert = true
@@ -35,14 +30,12 @@ enum SettingVM {
 extension SettingVM {
     enum Action: Equatable {
         case onAppear
-        case refresh
         case delete(SharedPhoto)
         case isPresentedAlert(Bool)
     }
 
     struct State: Equatable {
         var selectedPhotos: [SharedPhoto] = []
-        var isRefreshing = false
         var isPresentedAlert = false
         var alertText = ""
     }
@@ -68,13 +61,6 @@ struct SettingView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
-                RefreshControl(isRefreshing: Binding(
-                    get: { viewStore.isRefreshing },
-                    set: { _ in }
-                ), coordinateSpaceName: "RefreshControl", onRefresh: {
-                    viewStore.send(.refresh)
-                })
-
                 Text("ホームに表示する画像\n（ランダムに最大4つ表示されます）")
                     .foregroundColor(Color("Text"))
                     .font(Font.system(size: 15.0))

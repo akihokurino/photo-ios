@@ -2,7 +2,7 @@ import ComposableArchitecture
 import SwiftUI
 
 @main
-struct PhotoWidgetApp: App {
+struct PhotosApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     let store: Store<RootVM.State, RootVM.Action> = Store(

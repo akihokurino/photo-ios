@@ -11,13 +11,6 @@ enum AssetListVM {
                 return PhotosManager.requestAuthorization()
                     .eraseToEffect()
                     .map(AssetListVM.Action.authorized)
-            case .refresh:
-                state.isRefreshing = true
-                return PhotosManager.fetchAssets()
-                    .subscribe(on: environment.backgroundQueue)
-                    .receive(on: environment.mainQueue)
-                    .eraseToEffect()
-                    .map(AssetListVM.Action.assets)
             case .authorized(.authorized):
                 return PhotosManager.fetchAssets()
                     .subscribe(on: environment.backgroundQueue)
@@ -27,7 +20,6 @@ enum AssetListVM {
             case .authorized(let status):
                 return .none
             case .assets(let assets):
-                state.isRefreshing = false
                 state.assets = assets
                 return .none
             case .save(let asset):
@@ -61,7 +53,6 @@ enum AssetListVM {
 extension AssetListVM {
     enum Action: Equatable {
         case onAppear
-        case refresh
         case authorized(PhotoAuthorizationStatus)
         case assets([Asset])
         case save(Asset)
@@ -73,7 +64,6 @@ extension AssetListVM {
         var assets: [Asset] = []
         var isPresentedAlert = false
         var alertText = ""
-        var isRefreshing = false
     }
 
     struct Environment {
@@ -99,13 +89,6 @@ struct AssetListView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             ScrollView {
-                RefreshControl(isRefreshing: Binding(
-                    get: { viewStore.isRefreshing },
-                    set: { _ in }
-                ), coordinateSpaceName: "RefreshControl", onRefresh: {
-                    viewStore.send(.refresh)
-                })
-
                 LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {
                     ForEach(viewStore.assets, id: \.self) { asset in
                         Button(action: {
@@ -119,7 +102,6 @@ struct AssetListView: View {
                     }
                 }
             }
-            .coordinateSpace(name: "RefreshControl")
             .navigationBarTitle("写真", displayMode: .inline)
             .actionSheet(isPresented: $isShowActionSheet) {
                 ActionSheet(title: Text("選択してください"), buttons:
@@ -170,7 +152,7 @@ struct AssetRow: View {
             }
         }
         .onAppear {
-            asset.request(with: CGSize(width: AssetListView.thumbnailSize * 2, height: AssetListView.thumbnailSize * 2)) { image in
+            asset.request(with: CGSize(width: AssetListView.thumbnailSize * 3, height: AssetListView.thumbnailSize * 3)) { image in
                 self.image = image
             }
         }

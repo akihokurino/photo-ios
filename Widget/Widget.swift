@@ -63,7 +63,7 @@ struct SinglePhotoEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct SinglePhotoWidgetEntryView: View {
+struct SinglePhotosEntryView: View {
     var entry: SinglePhotoProvider.Entry
 
     var body: some View {
@@ -86,12 +86,12 @@ struct SinglePhotoWidgetEntryView: View {
     }
 }
 
-struct SinglePhotoWidget: Widget {
-    let kind: String = "SinglePhotoWidget"
+struct SinglePhotos: Widget {
+    let kind: String = "SinglePhotos"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: SinglePhotoProvider()) { entry in
-            SinglePhotoWidgetEntryView(entry: entry)
+            SinglePhotosEntryView(entry: entry)
         }
         .configurationDisplayName("シングル")
         .description("写真1枚で構成するWidget")
@@ -156,7 +156,7 @@ struct WidePhotoEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct WidePhotoWidgetEntryView: View {
+struct WidePhotosEntryView: View {
     var entry: WidePhotoProvider.Entry
 
     var body: some View {
@@ -191,12 +191,12 @@ struct WidePhotoWidgetEntryView: View {
     }
 }
 
-struct WidePhotoWidget: Widget {
-    let kind: String = "WidePhotoWidget"
+struct WidePhotos: Widget {
+    let kind: String = "WidePhotos"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: WidePhotoProvider()) { entry in
-            WidePhotoWidgetEntryView(entry: entry)
+            WidePhotosEntryView(entry: entry)
         }
         .configurationDisplayName("ワイド")
         .description("写真2枚で構成するWidget")
@@ -275,7 +275,7 @@ struct LargePhotoEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct LargePhotoWidgetEntryView: View {
+struct LargePhotosEntryView: View {
     var entry: LargePhotoProvider.Entry
 
     var body: some View {
@@ -332,12 +332,12 @@ struct LargePhotoWidgetEntryView: View {
     }
 }
 
-struct LargePhotoWidget: Widget {
-    let kind: String = "LargePhotoWidget"
+struct LargePhotos: Widget {
+    let kind: String = "LargePhotos"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: LargePhotoProvider()) { entry in
-            LargePhotoWidgetEntryView(entry: entry)
+            LargePhotosEntryView(entry: entry)
         }
         .configurationDisplayName("ラージ")
         .description("写真4枚で構成するWidget")

@@ -1,4 +1,4 @@
-# photo-widget-ios
+# photo-ios
 
 ## 構成
 

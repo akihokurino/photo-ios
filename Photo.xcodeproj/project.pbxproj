@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0250E50826C0D63000F976E9 /* PhotoWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E50726C0D63000F976E9 /* PhotoWidgetApp.swift */; };
+		0250E50826C0D63000F976E9 /* PhotoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E50726C0D63000F976E9 /* PhotoApp.swift */; };
 		0250E50A26C0D63000F976E9 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E50926C0D63000F976E9 /* RootView.swift */; };
 		0250E50C26C0D63200F976E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E50B26C0D63200F976E9 /* Assets.xcassets */; };
 		0250E50F26C0D63200F976E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E50E26C0D63200F976E9 /* Preview Assets.xcassets */; };
@@ -21,7 +21,6 @@
 		0250E52A26C1050C00F976E9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E52926C1050C00F976E9 /* Realm */; };
 		0250E52C26C1050C00F976E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E52B26C1050C00F976E9 /* RealmSwift */; };
 		0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */; };
-		0250E53026C11DD400F976E9 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52F26C11DD400F976E9 /* RefreshControl.swift */; };
 		0250E53726C128E200F976E9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0250E53626C128E200F976E9 /* WidgetKit.framework */; };
 		0250E53926C128E200F976E9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0250E53826C128E200F976E9 /* SwiftUI.framework */; };
 		0250E53C26C128E200F976E9 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E53B26C128E200F976E9 /* Widget.swift */; };
@@ -82,8 +81,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0250E50426C0D63000F976E9 /* PhotoWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0250E50726C0D63000F976E9 /* PhotoWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidgetApp.swift; sourceTree = "<group>"; };
+		0250E50426C0D63000F976E9 /* Photo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0250E50726C0D63000F976E9 /* PhotoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoApp.swift; sourceTree = "<group>"; };
 		0250E50926C0D63000F976E9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0250E50B26C0D63200F976E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0250E50E26C0D63200F976E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 		0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataStoreManager.swift; sourceTree = "<group>"; };
 		0250E52526C0F99B00F976E9 /* SharedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPhoto.swift; sourceTree = "<group>"; };
 		0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetIntent.swift; sourceTree = "<group>"; };
-		0250E52F26C11DD400F976E9 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		0250E53526C128E200F976E9 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0250E53626C128E200F976E9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0250E53826C128E200F976E9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -103,7 +101,7 @@
 		0250E53D26C128E200F976E9 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
 		0250E53E26C128E300F976E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0250E54026C128E400F976E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0250E54A26C1293100F976E9 /* PhotoWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoWidget.entitlements; sourceTree = "<group>"; };
+		0250E54A26C1293100F976E9 /* Photo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Photo.entitlements; sourceTree = "<group>"; };
 		0250E54B26C1297900F976E9 /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
 		0250E55326C1743700F976E9 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
 		02BCF7D426C8C2EB0015C852 /* Intent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Intent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +151,7 @@
 			children = (
 				0250E54B26C1297900F976E9 /* WidgetExtension.entitlements */,
 				0250E52126C0F7D000F976E9 /* Shared */,
-				0250E50626C0D63000F976E9 /* PhotoWidget */,
+				0250E50626C0D63000F976E9 /* Photo */,
 				0250E53A26C128E200F976E9 /* Widget */,
 				02BCF7D726C8C2EB0015C852 /* Intent */,
 				0250E50526C0D63000F976E9 /* Products */,
@@ -164,30 +162,29 @@
 		0250E50526C0D63000F976E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0250E50426C0D63000F976E9 /* PhotoWidget.app */,
+				0250E50426C0D63000F976E9 /* Photo.app */,
 				0250E53526C128E200F976E9 /* WidgetExtension.appex */,
 				02BCF7D426C8C2EB0015C852 /* Intent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0250E50626C0D63000F976E9 /* PhotoWidget */ = {
+		0250E50626C0D63000F976E9 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				0250E54A26C1293100F976E9 /* PhotoWidget.entitlements */,
-				0250E50726C0D63000F976E9 /* PhotoWidgetApp.swift */,
+				0250E54A26C1293100F976E9 /* Photo.entitlements */,
+				0250E50726C0D63000F976E9 /* PhotoApp.swift */,
 				0250E50926C0D63000F976E9 /* RootView.swift */,
 				0250E51D26C0E4D900F976E9 /* AssetListView.swift */,
 				0250E51F26C0E4ED00F976E9 /* SettingView.swift */,
 				0250E51626C0D6C900F976E9 /* PhotosManager.swift */,
 				0250E51826C0D88100F976E9 /* Asset.swift */,
-				0250E52F26C11DD400F976E9 /* RefreshControl.swift */,
 				0250E50B26C0D63200F976E9 /* Assets.xcassets */,
 				02C97F8226D22AC500560E88 /* Colors.xcassets */,
 				0250E51026C0D63200F976E9 /* Info.plist */,
 				0250E50D26C0D63200F976E9 /* Preview Content */,
 			);
-			path = PhotoWidget;
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		0250E50D26C0D63200F976E9 /* Preview Content */ = {
@@ -242,9 +239,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0250E50326C0D63000F976E9 /* PhotoWidget */ = {
+		0250E50326C0D63000F976E9 /* Photo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0250E51326C0D63200F976E9 /* Build configuration list for PBXNativeTarget "PhotoWidget" */;
+			buildConfigurationList = 0250E51326C0D63200F976E9 /* Build configuration list for PBXNativeTarget "Photo" */;
 			buildPhases = (
 				0250E50026C0D63000F976E9 /* Sources */,
 				0250E50126C0D63000F976E9 /* Frameworks */,
@@ -257,14 +254,14 @@
 				0250E54426C128E400F976E9 /* PBXTargetDependency */,
 				02BCF7DC26C8C2EB0015C852 /* PBXTargetDependency */,
 			);
-			name = PhotoWidget;
+			name = Photo;
 			packageProductDependencies = (
 				0250E51B26C0D92F00F976E9 /* ComposableArchitecture */,
 				0250E52926C1050C00F976E9 /* Realm */,
 				0250E52B26C1050C00F976E9 /* RealmSwift */,
 			);
 			productName = PhotoWidget;
-			productReference = 0250E50426C0D63000F976E9 /* PhotoWidget.app */;
+			productReference = 0250E50426C0D63000F976E9 /* Photo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0250E53426C128E200F976E9 /* WidgetExtension */ = {
@@ -329,7 +326,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0250E4FF26C0D63000F976E9 /* Build configuration list for PBXProject "PhotoWidget" */;
+			buildConfigurationList = 0250E4FF26C0D63000F976E9 /* Build configuration list for PBXProject "Photo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -346,7 +343,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0250E50326C0D63000F976E9 /* PhotoWidget */,
+				0250E50326C0D63000F976E9 /* Photo */,
 				0250E53426C128E200F976E9 /* WidgetExtension */,
 				02BCF7D326C8C2EB0015C852 /* Intent */,
 			);
@@ -396,9 +393,8 @@
 				0250E51926C0D88100F976E9 /* Asset.swift in Sources */,
 				0250E52626C0F99B00F976E9 /* SharedPhoto.swift in Sources */,
 				0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */,
-				0250E50826C0D63000F976E9 /* PhotoWidgetApp.swift in Sources */,
+				0250E50826C0D63000F976E9 /* PhotoApp.swift in Sources */,
 				0250E54226C128E400F976E9 /* Widget.intentdefinition in Sources */,
-				0250E53026C11DD400F976E9 /* RefreshControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,13 +562,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = PhotoWidget/PhotoWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Photo/Photo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"PhotoWidget/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Photo/Preview Content\"";
 				DEVELOPMENT_TEAM = 39KF2M8S75;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = PhotoWidget/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Photo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -593,13 +589,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = PhotoWidget/PhotoWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Photo/Photo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"PhotoWidget/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Photo/Preview Content\"";
 				DEVELOPMENT_TEAM = 39KF2M8S75;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = PhotoWidget/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Photo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -632,7 +628,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -655,7 +651,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -675,7 +671,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -695,14 +691,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0250E4FF26C0D63000F976E9 /* Build configuration list for PBXProject "PhotoWidget" */ = {
+		0250E4FF26C0D63000F976E9 /* Build configuration list for PBXProject "Photo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0250E51126C0D63200F976E9 /* Debug */,
@@ -711,7 +707,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0250E51326C0D63200F976E9 /* Build configuration list for PBXNativeTarget "PhotoWidget" */ = {
+		0250E51326C0D63200F976E9 /* Build configuration list for PBXNativeTarget "Photo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0250E51426C0D63200F976E9 /* Debug */,

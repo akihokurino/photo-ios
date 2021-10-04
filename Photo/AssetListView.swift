@@ -1,10 +1,16 @@
 import Combine
 import ComposableArchitecture
 import SwiftUI
-import WidgetKit
 
 enum AssetListVM {
     static let reducer = Reducer<State, Action, Environment>.combine(
+        CropVM.reducer.optional().pullback(
+            state: \AssetListVM.State.cropView,
+            action: /AssetListVM.Action.cropView,
+            environment: { _environment in
+                CropVM.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
+            }
+        ),
         Reducer { state, action, environment in
             switch action {
             case .onAppear:
@@ -22,29 +28,29 @@ enum AssetListVM {
             case .assets(let assets):
                 state.assets = assets
                 return .none
-            case .save(let asset):
-                return PhotosManager.requestImage(asset: asset, targetSize: CGSize(width: 300, height: 300))
-                    .flatMap { image in
-                        Future<Asset, Never> { promise in
-                            let sharedAsset = SharedPhoto(photosId: asset.id, imageData: image?.pngData())
-                            SharedDataStoreManager.shared.saveAsset(asset: sharedAsset)
-                            promise(.success(asset))
-                        }
-                    }
-                    .subscribe(on: environment.backgroundQueue)
-                    .receive(on: environment.mainQueue)
-                    .eraseToEffect()
-                    .map(AssetListVM.Action.saved)
-            case .saved(let asset):
-                state.isPresentedAlert = true
-                state.alertText = "写真を追加しました"
-
-                WidgetCenter.shared.reloadAllTimelines()
-
-                return .none
             case .isPresentedAlert(let val):
                 state.isPresentedAlert = val
                 return .none
+            case .isPresentedCropView(let val):
+                state.isPresentedCropView = val
+                return .none
+            case .showCropView(let asset):
+                state.cropView = CropVM.State(asset: asset)
+                state.isPresentedCropView = true
+                return .none
+            case .cropView(let action):
+                switch action {
+                case .register:
+                    state.isPresentedAlert = true
+                    state.alertText = "写真を追加しました"
+                    state.isPresentedCropView = false
+                    state.cropView = nil
+                    return .none
+                case .back:
+                    state.isPresentedCropView = false
+                    state.cropView = nil
+                    return .none
+                }
             }
         }
     )
@@ -55,15 +61,20 @@ extension AssetListVM {
         case onAppear
         case authorized(PhotoAuthorizationStatus)
         case assets([Asset])
-        case save(Asset)
-        case saved(Asset)
         case isPresentedAlert(Bool)
+        case isPresentedCropView(Bool)
+        case showCropView(Asset)
+
+        case cropView(CropVM.Action)
     }
 
     struct State: Equatable {
         var assets: [Asset] = []
         var isPresentedAlert = false
         var alertText = ""
+        var isPresentedCropView = false
+
+        var cropView: CropVM.State? = nil
     }
 
     struct Environment {
@@ -82,8 +93,6 @@ struct AssetListView: View {
         GridItem(.flexible()),
     ]
 
-    @State private var isShowActionSheet = false
-    @State private var selectedAsset: Asset? = nil
     static let thumbnailSize = UIScreen.main.bounds.size.width / 4
 
     var body: some View {
@@ -92,8 +101,7 @@ struct AssetListView: View {
                 LazyVGrid(columns: gridItemLayout, alignment: HorizontalAlignment.leading, spacing: 2) {
                     ForEach(viewStore.assets, id: \.self) { asset in
                         Button(action: {
-                            selectedAsset = asset
-                            isShowActionSheet = true
+                            viewStore.send(.showCropView(asset))
                         }) {
                             AssetRow(asset: asset)
                                 .frame(maxWidth: AssetListView.thumbnailSize)
@@ -103,23 +111,23 @@ struct AssetListView: View {
                 }
             }
             .navigationBarTitle("写真", displayMode: .inline)
-            .actionSheet(isPresented: $isShowActionSheet) {
-                ActionSheet(title: Text("選択してください"), buttons:
-                    [
-                        .default(Text("ホームに表示する")) {
-                            guard let asset = selectedAsset else {
-                                return
-                            }
-                            viewStore.send(.save(asset))
-                        },
-                        .cancel(Text("キャンセル")),
-                    ])
-            }
             .alert(isPresented: viewStore.binding(
                 get: \.isPresentedAlert,
                 send: AssetListVM.Action.isPresentedAlert
             )) {
                 Alert(title: Text(viewStore.alertText))
+            }
+            .sheet(isPresented: viewStore.binding(
+                get: \.isPresentedCropView,
+                send: AssetListVM.Action.isPresentedCropView
+            )) {
+                IfLetStore(
+                    store.scope(
+                        state: { $0.cropView },
+                        action: AssetListVM.Action.cropView
+                    ),
+                    then: CropView.init(store:)
+                )
             }
             .onAppear {
                 viewStore.send(.onAppear)
@@ -132,23 +140,21 @@ struct AssetRow: View {
     @ObservedObject var asset: Asset
     @State var image: UIImage? = nil
 
-    private let thumbnailSize = CGSize(width: AssetListView.thumbnailSize, height: AssetListView.thumbnailSize)
-
     var body: some View {
         HStack {
             if let image = image {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: thumbnailSize.width)
-                    .frame(height: thumbnailSize.height)
+                    .frame(width: AssetListView.thumbnailSize)
+                    .frame(height: AssetListView.thumbnailSize)
                     .clipped()
 
             } else {
                 Color
                     .gray
-                    .frame(width: thumbnailSize.width)
-                    .frame(height: thumbnailSize.height)
+                    .frame(width: AssetListView.thumbnailSize)
+                    .frame(height: AssetListView.thumbnailSize)
             }
         }
         .onAppear {

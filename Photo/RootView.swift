@@ -4,15 +4,15 @@ import SwiftUI
 enum RootVM {
     static let reducer = Reducer<State, Action, Environment>.combine(
         AssetListVM.reducer.optional().pullback(
-            state: \RootVM.State.photoList,
-            action: /RootVM.Action.photoList,
+            state: \RootVM.State.assetListView,
+            action: /RootVM.Action.assetListView,
             environment: { _environment in
                 AssetListVM.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
             }
         ),
         SettingVM.reducer.optional().pullback(
-            state: \RootVM.State.setting,
-            action: /RootVM.Action.setting,
+            state: \RootVM.State.settingView,
+            action: /RootVM.Action.settingView,
             environment: { _environment in
                 SettingVM.Environment(mainQueue: _environment.mainQueue, backgroundQueue: _environment.backgroundQueue)
             }
@@ -21,9 +21,9 @@ enum RootVM {
             switch action {
             case .onAppear:
                 return .none
-            case .photoList(let action):
+            case .assetListView(let action):
                 return .none
-            case .setting(let action):
+            case .settingView(let action):
                 return .none
             }
         }
@@ -33,13 +33,14 @@ enum RootVM {
 extension RootVM {
     enum Action: Equatable {
         case onAppear
-        case photoList(AssetListVM.Action)
-        case setting(SettingVM.Action)
+        
+        case assetListView(AssetListVM.Action)
+        case settingView(SettingVM.Action)
     }
 
     struct State: Equatable {
-        var photoList: AssetListVM.State? = AssetListVM.State()
-        var setting: SettingVM.State? = SettingVM.State()
+        var assetListView: AssetListVM.State? = AssetListVM.State()
+        var settingView: SettingVM.State? = SettingVM.State()
     }
 
     struct Environment {
@@ -57,8 +58,8 @@ struct RootView: View {
                 NavigationView {
                     IfLetStore(
                         store.scope(
-                            state: { $0.photoList },
-                            action: RootVM.Action.photoList
+                            state: { $0.assetListView },
+                            action: RootVM.Action.assetListView
                         ),
                         then: AssetListView.init(store:)
                     )
@@ -73,8 +74,8 @@ struct RootView: View {
                 NavigationView {
                     IfLetStore(
                         store.scope(
-                            state: { $0.setting },
-                            action: RootVM.Action.setting
+                            state: { $0.settingView },
+                            action: RootVM.Action.settingView
                         ),
                         then: SettingView.init(store:)
                     )

@@ -12,7 +12,6 @@
 		0250E50C26C0D63200F976E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E50B26C0D63200F976E9 /* Assets.xcassets */; };
 		0250E50F26C0D63200F976E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E50E26C0D63200F976E9 /* Preview Assets.xcassets */; };
 		0250E51726C0D6C900F976E9 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51626C0D6C900F976E9 /* PhotosManager.swift */; };
-		0250E51926C0D88100F976E9 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51826C0D88100F976E9 /* Asset.swift */; };
 		0250E51C26C0D92F00F976E9 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E51B26C0D92F00F976E9 /* ComposableArchitecture */; };
 		0250E51E26C0E4D900F976E9 /* AssetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51D26C0E4D900F976E9 /* AssetListView.swift */; };
 		0250E52026C0E4ED00F976E9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E51F26C0E4ED00F976E9 /* SettingView.swift */; };
@@ -46,6 +45,9 @@
 		02BCF7E626C8CDFD0015C852 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCF7E526C8CDFD0015C852 /* Realm */; };
 		02BCF7E826C8CDFD0015C852 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCF7E726C8CDFD0015C852 /* RealmSwift */; };
 		02C97F8326D22AC500560E88 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C97F8226D22AC500560E88 /* Colors.xcassets */; };
+		02CED36E270B0DFD006EC23C /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED36D270B0DFD006EC23C /* CropView.swift */; };
+		02CED371270B0F10006EC23C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 02CED370270B0F10006EC23C /* SDWebImageSwiftUI */; };
+		02CED374270B2FEE006EC23C /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED373270B2FEE006EC23C /* UIView+Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +90,6 @@
 		0250E50E26C0D63200F976E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0250E51026C0D63200F976E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0250E51626C0D6C900F976E9 /* PhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
-		0250E51826C0D88100F976E9 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		0250E51D26C0E4D900F976E9 /* AssetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetListView.swift; sourceTree = "<group>"; };
 		0250E51F26C0E4ED00F976E9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0250E52226C0F7E500F976E9 /* SharedDataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataStoreManager.swift; sourceTree = "<group>"; };
@@ -109,6 +110,8 @@
 		02BCF7D826C8C2EB0015C852 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		02BCF7DA26C8C2EB0015C852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02C97F8226D22AC500560E88 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		02CED36D270B0DFD006EC23C /* CropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
+		02CED373270B2FEE006EC23C /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02CED371270B0F10006EC23C /* SDWebImageSwiftUI in Frameworks */,
 				0250E52C26C1050C00F976E9 /* RealmSwift in Frameworks */,
 				0250E52A26C1050C00F976E9 /* Realm in Frameworks */,
 				0250E51C26C0D92F00F976E9 /* ComposableArchitecture in Frameworks */,
@@ -172,13 +176,14 @@
 		0250E50626C0D63000F976E9 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
+				02CED375270B3192006EC23C /* PhotosManager */,
+				02CED372270B2FC4006EC23C /* Extension */,
 				0250E54A26C1293100F976E9 /* Photo.entitlements */,
 				0250E50726C0D63000F976E9 /* PhotoApp.swift */,
 				0250E50926C0D63000F976E9 /* RootView.swift */,
 				0250E51D26C0E4D900F976E9 /* AssetListView.swift */,
 				0250E51F26C0E4ED00F976E9 /* SettingView.swift */,
-				0250E51626C0D6C900F976E9 /* PhotosManager.swift */,
-				0250E51826C0D88100F976E9 /* Asset.swift */,
+				02CED36D270B0DFD006EC23C /* CropView.swift */,
 				0250E50B26C0D63200F976E9 /* Assets.xcassets */,
 				02C97F8226D22AC500560E88 /* Colors.xcassets */,
 				0250E51026C0D63200F976E9 /* Info.plist */,
@@ -236,6 +241,22 @@
 			path = Intent;
 			sourceTree = "<group>";
 		};
+		02CED372270B2FC4006EC23C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				02CED373270B2FEE006EC23C /* UIView+Image.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		02CED375270B3192006EC23C /* PhotosManager */ = {
+			isa = PBXGroup;
+			children = (
+				0250E51626C0D6C900F976E9 /* PhotosManager.swift */,
+			);
+			path = PhotosManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +280,7 @@
 				0250E51B26C0D92F00F976E9 /* ComposableArchitecture */,
 				0250E52926C1050C00F976E9 /* Realm */,
 				0250E52B26C1050C00F976E9 /* RealmSwift */,
+				02CED370270B0F10006EC23C /* SDWebImageSwiftUI */,
 			);
 			productName = PhotoWidget;
 			productReference = 0250E50426C0D63000F976E9 /* Photo.app */;
@@ -338,6 +360,7 @@
 			packageReferences = (
 				0250E51A26C0D92F00F976E9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				0250E52726C103E600F976E9 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				02CED36F270B0F10006EC23C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 0250E50526C0D63000F976E9 /* Products */;
 			projectDirPath = "";
@@ -386,11 +409,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0250E52326C0F7E500F976E9 /* SharedDataStoreManager.swift in Sources */,
+				02CED36E270B0DFD006EC23C /* CropView.swift in Sources */,
+				02CED374270B2FEE006EC23C /* UIView+Image.swift in Sources */,
 				0250E51726C0D6C900F976E9 /* PhotosManager.swift in Sources */,
 				0250E50A26C0D63000F976E9 /* RootView.swift in Sources */,
 				0250E52026C0E4ED00F976E9 /* SettingView.swift in Sources */,
 				0250E51E26C0E4D900F976E9 /* AssetListView.swift in Sources */,
-				0250E51926C0D88100F976E9 /* Asset.swift in Sources */,
 				0250E52626C0F99B00F976E9 /* SharedPhoto.swift in Sources */,
 				0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */,
 				0250E50826C0D63000F976E9 /* PhotoApp.swift in Sources */,
@@ -753,6 +777,14 @@
 				minimumVersion = 10.12.0;
 			};
 		};
+		02CED36F270B0F10006EC23C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -790,6 +822,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0250E52726C103E600F976E9 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		02CED370270B0F10006EC23C /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02CED36F270B0F10006EC23C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

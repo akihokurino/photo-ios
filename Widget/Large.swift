@@ -6,20 +6,20 @@ struct LargePhotoProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> LargePhotoEntry {
         LargePhotoEntry(
             date: Date(),
-            data1: nil,
-            data2: nil,
-            data3: nil,
-            data4: nil,
+            data1: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data2: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data3: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data4: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
             configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (LargePhotoEntry) -> ()) {
         let entry = LargePhotoEntry(
             date: Date(),
-            data1: nil,
-            data2: nil,
-            data3: nil,
-            data4: nil,
+            data1: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data2: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data3: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data4: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
             configuration: configuration)
         completion(entry)
     }

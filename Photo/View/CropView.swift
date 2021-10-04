@@ -12,6 +12,7 @@ enum CropVM {
             let asset = state.asset
             let sharedAsset = SharedPhoto(photosId: asset.id, imageData: image.jpegData(compressionQuality: 0.5))
             SharedDataStoreManager.shared.saveAsset(asset: sharedAsset)
+            
             WidgetCenter.shared.reloadAllTimelines()
 
             return .none

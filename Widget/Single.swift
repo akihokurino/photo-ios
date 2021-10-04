@@ -10,14 +10,14 @@ struct SinglePhotoProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SinglePhotoEntry {
         SinglePhotoEntry(
             date: Date(),
-            data: nil,
+            data: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
             configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SinglePhotoEntry) -> ()) {
         let entry = SinglePhotoEntry(
             date: Date(),
-            data: nil,
+            data: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
             configuration: configuration)
         completion(entry)
     }

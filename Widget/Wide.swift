@@ -4,11 +4,19 @@ import WidgetKit
 
 struct WidePhotoProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> WidePhotoEntry {
-        WidePhotoEntry(date: Date(), data1: nil, data2: nil, configuration: ConfigurationIntent())
+        WidePhotoEntry(
+            date: Date(),
+            data1: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data2: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (WidePhotoEntry) -> ()) {
-        let entry = WidePhotoEntry(date: Date(), data1: nil, data2: nil, configuration: configuration)
+        let entry = WidePhotoEntry(
+            date: Date(),
+            data1: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            data2: SharedPhoto(photosId: "", imageData: UIImage(systemName: "square")?.jpegData(compressionQuality: 1.0)),
+            configuration: configuration)
         completion(entry)
     }
 

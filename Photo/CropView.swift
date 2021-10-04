@@ -48,6 +48,7 @@ struct CropView: View {
     @State private var frameSize: CGSize = .zero
     @State private var framePath = Path()
     @State private var cropRect: CGRect = .zero
+    @State private var shouldHideFrame: Bool = false
 
     var cropView: some View {
         WithViewStore(store) { _ in
@@ -64,8 +65,10 @@ struct CropView: View {
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
                         .mask(framePath.fill(style: FillStyle(eoFill: true)))
 
-                    FrameForegroundView(frameSize: $frameSize)
-                        .frame(width: frameSize.width, height: frameSize.height)
+                    if !shouldHideFrame {
+                        FrameForegroundView(frameSize: $frameSize)
+                            .frame(width: frameSize.width, height: frameSize.height)
+                    }
                 }
             }
         }
@@ -110,7 +113,10 @@ struct CropView: View {
                 Spacer().frame(height: 50)
 
                 Button(action: {
-                    viewStore.send(.register(convertViewToImage()))
+                    shouldHideFrame = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        viewStore.send(.register(convertViewToImage()))
+                    }
                 }) {
                     Text("登録する")
                 }
@@ -127,7 +133,7 @@ struct CropView: View {
     }
 
     func convertViewToImage() -> UIImage {
-        return UIApplication.shared.windows[0].rootViewController?.presentedViewController?.view.asImage(rect: cropRect) ?? UIImage()
+        return UIApplication.shared.windows[0].rootViewController!.presentedViewController!.view.asImage(rect: cropRect)
     }
 
     func holeShapeMask() -> Path {

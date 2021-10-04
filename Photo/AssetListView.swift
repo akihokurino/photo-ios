@@ -117,7 +117,7 @@ struct AssetListView: View {
             )) {
                 Alert(title: Text(viewStore.alertText))
             }
-            .sheet(isPresented: viewStore.binding(
+            .fullScreenCover(isPresented: viewStore.binding(
                 get: \.isPresentedCropView,
                 send: AssetListVM.Action.isPresentedCropView
             )) {

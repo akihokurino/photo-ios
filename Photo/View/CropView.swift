@@ -10,7 +10,7 @@ enum CropVM {
         switch action {
         case .register(let image):
             let asset = state.asset
-            let sharedAsset = SharedPhoto(photosId: asset.id, imageData: image.jpegData(compressionQuality: 0.5))
+            let sharedAsset = SharedPhoto(photosId: asset.id, imageData: image.jpegData(compressionQuality: 0.9))
             SharedDataStoreManager.shared.saveAsset(asset: sharedAsset)
             
             WidgetCenter.shared.reloadAllTimelines()

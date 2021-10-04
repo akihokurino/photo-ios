@@ -22,7 +22,6 @@
 		0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E52D26C11B4C00F976E9 /* WidgetIntent.swift */; };
 		0250E53726C128E200F976E9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0250E53626C128E200F976E9 /* WidgetKit.framework */; };
 		0250E53926C128E200F976E9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0250E53826C128E200F976E9 /* SwiftUI.framework */; };
-		0250E53C26C128E200F976E9 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E53B26C128E200F976E9 /* Widget.swift */; };
 		0250E53F26C128E400F976E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E53E26C128E300F976E9 /* Assets.xcassets */; };
 		0250E54126C128E400F976E9 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0250E53D26C128E200F976E9 /* Widget.intentdefinition */; };
 		0250E54226C128E400F976E9 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0250E53D26C128E200F976E9 /* Widget.intentdefinition */; };
@@ -48,6 +47,12 @@
 		02CED36E270B0DFD006EC23C /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED36D270B0DFD006EC23C /* CropView.swift */; };
 		02CED371270B0F10006EC23C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 02CED370270B0F10006EC23C /* SDWebImageSwiftUI */; };
 		02CED374270B2FEE006EC23C /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED373270B2FEE006EC23C /* UIView+Image.swift */; };
+		02CED377270B45F2006EC23C /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED376270B45F2006EC23C /* Asset.swift */; };
+		02CED37C270B473D006EC23C /* Array+Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED37A270B46DB006EC23C /* Array+Chunk.swift */; };
+		02CED384270B47F0006EC23C /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED37E270B4784006EC23C /* Single.swift */; };
+		02CED385270B47F5006EC23C /* Wide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED380270B478C006EC23C /* Wide.swift */; };
+		02CED386270B47F7006EC23C /* Large.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED382270B479A006EC23C /* Large.swift */; };
+		02CED389270B48B2006EC23C /* ConfigurationIntent+Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CED387270B4825006EC23C /* ConfigurationIntent+Interval.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +103,6 @@
 		0250E53526C128E200F976E9 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0250E53626C128E200F976E9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0250E53826C128E200F976E9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		0250E53B26C128E200F976E9 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		0250E53D26C128E200F976E9 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
 		0250E53E26C128E300F976E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0250E54026C128E400F976E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +116,12 @@
 		02C97F8226D22AC500560E88 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		02CED36D270B0DFD006EC23C /* CropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
 		02CED373270B2FEE006EC23C /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
+		02CED376270B45F2006EC23C /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		02CED37A270B46DB006EC23C /* Array+Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunk.swift"; sourceTree = "<group>"; };
+		02CED37E270B4784006EC23C /* Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
+		02CED380270B478C006EC23C /* Wide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wide.swift; sourceTree = "<group>"; };
+		02CED382270B479A006EC23C /* Large.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Large.swift; sourceTree = "<group>"; };
+		02CED387270B4825006EC23C /* ConfigurationIntent+Interval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfigurationIntent+Interval.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,12 +188,9 @@
 			children = (
 				02CED375270B3192006EC23C /* PhotosManager */,
 				02CED372270B2FC4006EC23C /* Extension */,
+				02CED378270B4617006EC23C /* View */,
 				0250E54A26C1293100F976E9 /* Photo.entitlements */,
 				0250E50726C0D63000F976E9 /* PhotoApp.swift */,
-				0250E50926C0D63000F976E9 /* RootView.swift */,
-				0250E51D26C0E4D900F976E9 /* AssetListView.swift */,
-				0250E51F26C0E4ED00F976E9 /* SettingView.swift */,
-				02CED36D270B0DFD006EC23C /* CropView.swift */,
 				0250E50B26C0D63200F976E9 /* Assets.xcassets */,
 				02C97F8226D22AC500560E88 /* Colors.xcassets */,
 				0250E51026C0D63200F976E9 /* Info.plist */,
@@ -223,7 +230,10 @@
 		0250E53A26C128E200F976E9 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				0250E53B26C128E200F976E9 /* Widget.swift */,
+				02CED379270B46C4006EC23C /* Extension */,
+				02CED37E270B4784006EC23C /* Single.swift */,
+				02CED380270B478C006EC23C /* Wide.swift */,
+				02CED382270B479A006EC23C /* Large.swift */,
 				0250E55326C1743700F976E9 /* WidgetBundle.swift */,
 				0250E53D26C128E200F976E9 /* Widget.intentdefinition */,
 				0250E53E26C128E300F976E9 /* Assets.xcassets */,
@@ -253,8 +263,29 @@
 			isa = PBXGroup;
 			children = (
 				0250E51626C0D6C900F976E9 /* PhotosManager.swift */,
+				02CED376270B45F2006EC23C /* Asset.swift */,
 			);
 			path = PhotosManager;
+			sourceTree = "<group>";
+		};
+		02CED378270B4617006EC23C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0250E50926C0D63000F976E9 /* RootView.swift */,
+				0250E51D26C0E4D900F976E9 /* AssetListView.swift */,
+				0250E51F26C0E4ED00F976E9 /* SettingView.swift */,
+				02CED36D270B0DFD006EC23C /* CropView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		02CED379270B46C4006EC23C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				02CED37A270B46DB006EC23C /* Array+Chunk.swift */,
+				02CED387270B4825006EC23C /* ConfigurationIntent+Interval.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +445,7 @@
 				0250E51726C0D6C900F976E9 /* PhotosManager.swift in Sources */,
 				0250E50A26C0D63000F976E9 /* RootView.swift in Sources */,
 				0250E52026C0E4ED00F976E9 /* SettingView.swift in Sources */,
+				02CED377270B45F2006EC23C /* Asset.swift in Sources */,
 				0250E51E26C0E4D900F976E9 /* AssetListView.swift in Sources */,
 				0250E52626C0F99B00F976E9 /* SharedPhoto.swift in Sources */,
 				0250E52E26C11B4C00F976E9 /* WidgetIntent.swift in Sources */,
@@ -427,11 +459,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0250E54D26C1349D00F976E9 /* SharedDataStoreManager.swift in Sources */,
+				02CED384270B47F0006EC23C /* Single.swift in Sources */,
+				02CED385270B47F5006EC23C /* Wide.swift in Sources */,
+				02CED386270B47F7006EC23C /* Large.swift in Sources */,
 				0250E54E26C1349D00F976E9 /* SharedPhoto.swift in Sources */,
 				0250E54126C128E400F976E9 /* Widget.intentdefinition in Sources */,
 				0250E55526C1746F00F976E9 /* WidgetBundle.swift in Sources */,
 				0250E54C26C1349D00F976E9 /* WidgetIntent.swift in Sources */,
-				0250E53C26C128E200F976E9 /* Widget.swift in Sources */,
+				02CED37C270B473D006EC23C /* Array+Chunk.swift in Sources */,
+				02CED389270B48B2006EC23C /* ConfigurationIntent+Interval.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

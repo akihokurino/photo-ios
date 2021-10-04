@@ -35,6 +35,8 @@
 		0250E55026C1359400F976E9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E54F26C1359400F976E9 /* Realm */; };
 		0250E55226C1359400F976E9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0250E55126C1359400F976E9 /* RealmSwift */; };
 		0250E55526C1746F00F976E9 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0250E55326C1743700F976E9 /* WidgetBundle.swift */; };
+		02B01D7D270AFBA40065F94E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E50B26C0D63200F976E9 /* Assets.xcassets */; };
+		02B01D7E270AFBAA0065F94E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0250E53E26C128E300F976E9 /* Assets.xcassets */; };
 		02BCF7D626C8C2EB0015C852 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BCF7D526C8C2EB0015C852 /* Intents.framework */; };
 		02BCF7D926C8C2EB0015C852 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BCF7D826C8C2EB0015C852 /* IntentHandler.swift */; };
 		02BCF7DD26C8C2EB0015C852 /* Intent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 02BCF7D426C8C2EB0015C852 /* Intent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -358,6 +360,7 @@
 			files = (
 				02C97F8326D22AC500560E88 /* Colors.xcassets in Resources */,
 				0250E50F26C0D63200F976E9 /* Preview Assets.xcassets in Resources */,
+				02B01D7E270AFBAA0065F94E /* Assets.xcassets in Resources */,
 				0250E50C26C0D63200F976E9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +369,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B01D7D270AFBA40065F94E /* Assets.xcassets in Resources */,
 				0250E53F26C128E400F976E9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +565,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = PhotoWidget/PhotoWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -573,11 +578,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = app.akiho.photos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -587,6 +592,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = PhotoWidget/PhotoWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -599,11 +605,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = app.akiho.photos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -622,7 +628,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget.Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = app.akiho.photos.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -645,7 +651,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget.Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = app.akiho.photos.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -665,7 +671,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget.Intent";
+				PRODUCT_BUNDLE_IDENTIFIER = app.akiho.photos.Intent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -685,7 +691,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.akiho.photo-widget.Intent";
+				PRODUCT_BUNDLE_IDENTIFIER = app.akiho.photos.Intent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

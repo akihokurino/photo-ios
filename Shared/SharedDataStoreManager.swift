@@ -4,7 +4,7 @@ import Realm
 import RealmSwift
 
 private enum UserDefaultsKey {
-    static let suiteName = "group.com.photo-widget"
+    static let suiteName = "group.app.akiho.photos"
     static let widgetIntents = "widgetIntents"
 }
 
@@ -82,7 +82,7 @@ final class RealmClient {
     private let realm: Realm?
 
     init(fileName: String) {
-        let groupID: String = "group.com.photo-widget"
+        let groupID: String = "group.app.akiho.photos"
         var config = Realm.Configuration(schemaVersion: 0)
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID)!
         config.fileURL = url.appendingPathComponent("db.realm")

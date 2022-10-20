@@ -1,6 +1,5 @@
 import Combine
 import Foundation
-import Realm
 import RealmSwift
 
 private enum UserDefaultsKey {
